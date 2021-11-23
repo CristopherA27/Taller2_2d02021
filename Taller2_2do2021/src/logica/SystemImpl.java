@@ -1,7 +1,7 @@
 package logica;
 import dominio.*;
         
-
+//Una wea estupida
 public class SystemImpl implements SystemI{
 	
 	private ListaPersonas lpersonas;
