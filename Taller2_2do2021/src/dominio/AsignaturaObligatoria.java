@@ -10,6 +10,7 @@ public class AsignaturaObligatoria extends Asignatura{
 	public AsignaturaObligatoria(String codigoAsignatura, String nombreAsignatura, int cantCreditos,int nivelMalla) {
 		super(codigoAsignatura, nombreAsignatura, cantCreditos);
 		this.nivelMalla = nivelMalla;
+		listaAsignaturas = new ListaAsignaturas(100);
 	}
 
 	public int getNivelMalla() {
