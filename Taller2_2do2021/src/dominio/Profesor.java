@@ -1,7 +1,11 @@
 package dominio;
+import logica.*;
 
 public class Profesor extends Persona{
 	private int salario;
+	private ListaParalelos listaParalelos;
+	private ListaAsignaturas listaAsignaturas;
+	
 	
 	public Profesor(String rut, String correo, String contraseña,int salario) {
 		super(rut, correo, contraseña);
@@ -16,6 +20,15 @@ public class Profesor extends Persona{
 	public void setSalario(int salario) {
 		this.salario = salario;
 	}
+
+	public ListaParalelos getListaParalelos() {
+		return listaParalelos;
+	}
+
+	public ListaAsignaturas getListaAsignaturas() {
+		return listaAsignaturas;
+	}
+
 	
 
 }

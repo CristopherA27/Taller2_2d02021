@@ -31,13 +31,24 @@ public class SystemImpl implements SystemI{
 	@Override
 	public boolean ingresarAsignaturaObligatoria(String codigoAsignatura, String nombreAsignatura, int cantCreditos,
 			int nivelMalla, int cantAsignaturasPrerrequisito) {
-		Asignatura asignaturaObligatoria = new AsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla);
-		boolean ingresado = lasignaturas.ingresar(asignaturaObligatoria);
+		Asignatura asignatura = new AsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla);
+		boolean ingresado = lasignaturas.ingresar(asignatura);
 		if(ingresado) {
-			for(int i=0;i<cantAsignaturasPrerrequisito;i++) {
-				boolean ingresada = 
-			
+			if(asignatura instanceof AsignaturaObligatoria) {
+				//ListaAsignaturas asignatura = (AsignaturaObligatoria) 
+				((AsignaturaObligatoria) asignatura).getListaAsignaturas().getCant();
+				for(int i=0;i<((AsignaturaObligatoria) asignatura).getListaAsignaturas().getCant();i++) {
+					
+				}
 			}
+		}
+		return ingresado;
+	}
+	
+	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura, int cantAsignaturasPrerrequisito) {
+		Asignatura asignatura = lasignaturas.buscar(codigoAsignatura);
+		if(asignatura != null) {
+			
 		}
 		return false;
 	}
@@ -47,7 +58,7 @@ public class SystemImpl implements SystemI{
 			int cantCreditosPrerrequisitos) {
 		Asignatura asignaturaOpcional = new AsignaturaOpcional(codigoAsignatura, nombreAsignatura, cantCreditos, cantCreditosPrerrequisitos);
 		boolean ingreso = lasignaturas.ingresar(asignaturaOpcional);
-		return ingreso.;
+		return ingreso;
 	}
 
 	@Override
@@ -128,7 +139,6 @@ public class SystemImpl implements SystemI{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
 	
 
 }
