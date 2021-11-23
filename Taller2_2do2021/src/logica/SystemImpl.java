@@ -1,7 +1,7 @@
 package logica;
 import dominio.*;
         
-//Una wea estupida
+
 public class SystemImpl implements SystemI{
 	
 	private ListaPersonas lpersonas;
@@ -31,17 +31,8 @@ public class SystemImpl implements SystemI{
 	@Override
 	public boolean ingresarAsignaturaObligatoria(String codigoAsignatura, String nombreAsignatura, int cantCreditos,
 			int nivelMalla, int cantAsignaturasPrerrequisito) {
-		Asignatura asignatura = new AsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla);
+		Asignatura asignatura = new AsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla,int cantAsignaturasPrerrequisito);
 		boolean ingresado = lasignaturas.ingresar(asignatura);
-		if(ingresado) {
-			if(asignatura instanceof AsignaturaObligatoria) {
-				//ListaAsignaturas asignatura = (AsignaturaObligatoria) 
-				((AsignaturaObligatoria) asignatura).getListaAsignaturas().getCant();
-				for(int i=0;i<((AsignaturaObligatoria) asignatura).getListaAsignaturas().getCant();i++) {
-					
-				}
-			}
-		}
 		return ingresado;
 	}
 	
