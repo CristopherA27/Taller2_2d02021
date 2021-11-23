@@ -14,6 +14,6 @@ public class Estudiante extends Persona{
 
 	public void setNivelAlumno(int nivelAlumno) {
 		this.nivelAlumno = nivelAlumno;
-	}
+	} 
 
 }
