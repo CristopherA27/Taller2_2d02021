@@ -3,7 +3,7 @@ package logica;
 public interface SystemI {
 	//ingresar
 	
-	public boolean ingresarEstudiante(String rut,String correo,String contraseña);
+	public boolean ingresarEstudiante(String rut,String correo,String contraseña,int nivelAlumno);
 	public boolean ingresarProfesor(String rut,String correo,String contraseña,int salario);
 	public boolean ingresarAsignaturaObligatoria(String codigoAsignatura,String nombreAsignatura,int cantCreditos,int nivelMalla,int cantAsignaturasPrerrequisito);
 	public boolean ingresarAsignaturaOpcional(String codigoAsignatura, String nombreAsignatura, int cantCreditos,int cantCreditosPrerrequisitos);
