@@ -24,5 +24,11 @@ public class AsignaturaObligatoria extends Asignatura{
 	public ListaAsignaturas getListaAsignaturas() {
 		return listaAsignaturas;
 	}
+
+	public void setListaAsignaturas(ListaAsignaturas listaAsignaturas) {
+		this.listaAsignaturas = listaAsignaturas;
+	}
+	
+	
 	
 }

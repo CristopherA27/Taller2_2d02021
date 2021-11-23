@@ -31,15 +31,23 @@ public class SystemImpl implements SystemI{
 	@Override
 	public boolean ingresarAsignaturaObligatoria(String codigoAsignatura, String nombreAsignatura, int cantCreditos,
 			int nivelMalla, int cantAsignaturasPrerrequisito) {
-		
+		Asignatura asignaturaObligatoria = new AsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla);
+		boolean ingresado = lasignaturas.ingresar(asignaturaObligatoria);
+		if(ingresado) {
+			for(int i=0;i<cantAsignaturasPrerrequisito;i++) {
+				boolean ingresada = 
+			
+			}
+		}
 		return false;
 	}
 
-	@Override
+
 	public boolean ingresarAsignaturaOpcional(String codigoAsignatura, String nombreAsignatura, int cantCreditos,
 			int cantCreditosPrerrequisitos) {
-		// TODO Auto-generated method stub
-		return false;
+		Asignatura asignaturaOpcional = new AsignaturaOpcional(codigoAsignatura, nombreAsignatura, cantCreditos, cantCreditosPrerrequisitos);
+		boolean ingreso = lasignaturas.ingresar(asignaturaOpcional);
+		return ingreso.;
 	}
 
 	@Override
