@@ -5,6 +5,7 @@ import logica.*;
 public class AsignaturaObligatoria extends Asignatura{
 	
 	private int nivelMalla;
+	private int cantAsignaturasPrerrequisito;
 	private ListaAsignaturas listaAsignaturas;
 
 	public AsignaturaObligatoria(String codigoAsignatura, String nombreAsignatura, int cantCreditos,int nivelMalla,int cantAsignaturasPrerrequisito) {
@@ -19,6 +20,15 @@ public class AsignaturaObligatoria extends Asignatura{
 
 	public void setNivelMalla(int nivelMalla) {
 		this.nivelMalla = nivelMalla;
+	}
+	
+
+	public int getCantAsignaturasPrerrequisito() {
+		return cantAsignaturasPrerrequisito;
+	}
+
+	public void setCantAsignaturasPrerrequisito(int cantAsignaturasPrerrequisito) {
+		this.cantAsignaturasPrerrequisito = cantAsignaturasPrerrequisito;
 	}
 
 	public ListaAsignaturas getListaAsignaturas() {
