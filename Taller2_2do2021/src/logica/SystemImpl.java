@@ -31,15 +31,21 @@ public class SystemImpl implements SystemI{
 	@Override
 	public boolean ingresarAsignaturaObligatoria(String codigoAsignatura, String nombreAsignatura, int cantCreditos,
 			int nivelMalla, int cantAsignaturasPrerrequisito) {
-		Asignatura asignatura = new AsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla,int cantAsignaturasPrerrequisito);
-		boolean ingresado = lasignaturas.ingresar(asignatura);
+		Asignatura asignaturaobligatoria = new AsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla,cantAsignaturasPrerrequisito);
+		boolean ingresado = lasignaturas.ingresar(asignaturaobligatoria);
 		return ingresado;
+	
 	}
 	
-	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura, int cantAsignaturasPrerrequisito) {
-		Asignatura asignatura = lasignaturas.buscar(codigoAsignatura);
+	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura, int cantAsignaturasPrerrequisito,String codigoBuscado) {
+		Asignatura asignatura = lasignaturas.buscar(codigoBuscado);
 		if(asignatura != null) {
-			
+			for(int i=0;i<lasignaturas.getCant();i++) {
+				Asignatura asig = lasignaturas.getElementoI(i);
+				if(asig instanceof AsignaturaObligatoria && asig.getCodigoAsignatura().equalsIgnoreCase( codigoAsignatura)) {
+					((AsignaturaObligatoria) asig).getListaAsignaturas().ingresar(asignatura);
+				}
+			}
 		}
 		return false;
 	}
@@ -54,13 +60,23 @@ public class SystemImpl implements SystemI{
 
 	@Override
 	public boolean ingresarParalelo(int numeroParalelo) {
-		// TODO Auto-generated method stub
+		Paralelo paralelo = new Paralelo(numeroParalelo);
+		boolean ingresado = lparalelos.ingresar(paralelo);
 		return false;
 	}
 
 	@Override
 	public boolean ingresarAsociarAsignatura(String rutEstudiante, String codigoAsignatura, double notaFinal) {
-		// TODO Auto-generated method stub
+		Persona estudiante = lpersonas.buscar(rutEstudiante);
+		if(estudiante != null) {
+			Estudiante est =(Estudiante) estudiante;
+			if(notaFinal>0) {
+				est.getAsignaturasCursadas().ingresar(codigoAsignatura);
+				
+				
+			}
+		}
+		
 		return false;
 	}
 
