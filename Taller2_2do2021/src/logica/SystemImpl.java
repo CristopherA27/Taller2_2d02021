@@ -73,15 +73,29 @@ public class SystemImpl implements SystemI{
 				Estudiante estudiante = (Estudiante) persona;
 				estudiante.getAsignaturasCursadas().ingresar(asig);
 				estudiante.getAsignaturasCursadas().buscar(codigoAsignatura).setNotaFinal(notaFinal);
+			}else {
+				throw new NullPointerException("La "+asig+" no existe");
 			}
 		}
 		return false;
 	}
 	
 	public boolean ingresarAsociarAsignaturaInscrita (String rutEstudiante,String codigoAsignatura,int numeroParalelo) {
-		Persona p = lpersonas.buscar(rutEstudiante);
-		if(persona != null) {
-			
+		Persona persona = lpersonas.buscar(rutEstudiante);
+		if(persona != null  && persona instanceof Estudiante) {
+			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+			if(asig != null) {
+				Estudiante estudiante = (Estudiante) persona;
+				estudiante.getAsignaturasInscritas().ingresar(asig);
+				Paralelo numParalelo = lparalelos.buscar(numeroParalelo);
+				if(numeroParalelo != 0) {
+					estudiante.getAsignaturasInscritas().buscar(codigoAsignatura).setNumeroParalelo(numParalelo);
+				}else {
+					throw new NullPointerException("El "+numeroParalelo+" no existe");
+				}
+			}else {
+				throw new NullPointerException("La "+asig+" no existe");
+			}
 		}
 		
 		return false;        
