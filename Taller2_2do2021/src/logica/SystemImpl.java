@@ -50,7 +50,6 @@ public class SystemImpl implements SystemI{
 		return false;
 	}
 
-
 	public boolean ingresarAsignaturaOpcional(String codigoAsignatura, String nombreAsignatura, int cantCreditos,
 			int cantCreditosPrerrequisitos) {
 		Asignatura asignaturaOpcional = new AsignaturaOpcional(codigoAsignatura, nombreAsignatura, cantCreditos, cantCreditosPrerrequisitos);
@@ -66,18 +65,26 @@ public class SystemImpl implements SystemI{
 	}
 
 	@Override
-	public boolean ingresarAsociarAsignatura(String rutEstudiante, String codigoAsignatura, double notaFinal) {
-		Persona estudiante = lpersonas.buscar(rutEstudiante);
-		if(estudiante != null) {
-			Estudiante est =(Estudiante) estudiante;
-			if(notaFinal>0) {
-				est.getAsignaturasCursadas().ingresar(codigoAsignatura);
-				
-				
+	public boolean ingresarAsociarAsignaturaCursada(String rutEstudiante, String codigoAsignatura, double notaFinal) {
+		Persona persona = lpersonas.buscar(rutEstudiante);
+		if(persona != null && persona instanceof Estudiante) {
+			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+			if(asig != null) {
+				Estudiante estudiante = (Estudiante) persona;
+				estudiante.getAsignaturasCursadas().ingresar(asig);
+				estudiante.getAsignaturasCursadas().buscar(codigoAsignatura).setNotaFinal(notaFinal);
 			}
 		}
-		
 		return false;
+	}
+	
+	public boolean ingresarAsociarAsignaturaInscrita (String rutEstudiante,String codigoAsignatura,int numeroParalelo) {
+		Persona p = lpersonas.buscar(rutEstudiante);
+		if(persona != null) {
+			
+		}
+		
+		return false;        
 	}
 
 	@Override

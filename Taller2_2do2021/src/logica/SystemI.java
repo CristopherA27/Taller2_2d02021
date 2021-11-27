@@ -8,11 +8,13 @@ public interface SystemI {
 	public boolean ingresarAsignaturaObligatoria(String codigoAsignatura,String nombreAsignatura,int cantCreditos,int nivelMalla,int cantAsignaturasPrerrequisito);
 	public boolean ingresarAsignaturaOpcional(String codigoAsignatura, String nombreAsignatura, int cantCreditos,int cantCreditosPrerrequisitos);
 	public boolean ingresarParalelo(int numeroParalelo);
-	public boolean ingresarAsociarAsignatura(String rutEstudiante,String codigoAsignatura,double notaFinal);
+	public boolean ingresarAsociarAsignaturaCursada(String rutEstudiante,String codigoAsignatura,double notaFinal);
+	public boolean ingresarAsociarAsignaturaInscrita(String rutEstudiante,String codigoAsignatura,int numeroParalelo)
+
 	public boolean ingresarAsociarParaleloProfesorAsigntura(int numeroParalelo,String codigoAsignatura,String rutProfesor);
 	
 	//Asociar codigos de asignatura a ASIGNATURAOBLIGATORAIA
-	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura,int cantAsignaturasPrerrequisito);
+	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura,int cantAsignaturasPrerrequisito,String codigoBuscado);
 	
 	public String obtenerAsignaturasDisponibles();
 	public String obtenerParalelosDisponibles();

@@ -2,39 +2,31 @@ package dominio;
 
 public class Asignatura {
 	private String codigoAsignatura;
-	private String nombreAsignatura;
-	private int cantCreditos;
+	private double notaFinal;
+	private Paralelo numeroParalelo;
 	
-	public Asignatura(String codigoAsignatura,String nombreAsignatura, int cantCreditos) {
+	public Asignatura(String codigoAsignatura) {
 		this.codigoAsignatura = codigoAsignatura;
-		this.nombreAsignatura = nombreAsignatura;
-		this.cantCreditos = cantCreditos;
+		notaFinal = 0;
+		numeroParalelo = null;
 	}
-
+	public double getNotaFinal() {
+		return notaFinal;
+	}
+	public void setNotaFinal(double notaFinal) {
+		this.notaFinal = notaFinal;
+	}
+	public Paralelo getNumeroParalelo() {
+		return numeroParalelo;
+	}
+	public void setNumeroParalelo(Paralelo numeroParalelo) {
+		this.numeroParalelo = numeroParalelo;
+	}
 	public String getCodigoAsignatura() {
 		return codigoAsignatura;
 	}
-
 	public void setCodigoAsignatura(String codigoAsignatura) {
 		this.codigoAsignatura = codigoAsignatura;
 	}
-
-	public String getNombreAsignatura() {
-		return nombreAsignatura;
-	}
-
-	public void setNombreAsignatura(String nombreAsignatura) {
-		this.nombreAsignatura = nombreAsignatura;
-	}
-
-	public int getCantCreditos() {
-		return cantCreditos;
-	}
-
-	public void setCantCreditos(int cantCreditos) {
-		this.cantCreditos = cantCreditos;
-	}
 	
-	
-
 }
