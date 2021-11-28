@@ -8,6 +8,54 @@ import ucn.*;
 
 public class App {
 	
+	public static void leerAsignaturas(SystemI system) throws FileNotFoundException {
+		Scanner s = new Scanner(new File("Asignaturas.txt"));
+		System.out.println("Leyendo asignaturas");
+		while(s.hasNextLine()) {
+			String line = s.nextLine();
+			String [] partes = line.split(",");
+			String codigoAsignatura = partes[0];
+			String nombreAsignatura = partes[1];
+			int cantCreditos = Integer.parseInt(partes[2]);
+			String tipoAsignatura = partes[3];
+			if(tipoAsignatura.equalsIgnoreCase("Obligatoria")) {
+				int nivelMalla = Integer.parseInt(partes[4]);
+				int cantAsignaturasPrerrequisito = Integer.parseInt(partes[5]);
+				try {
+					boolean ingreso=system.ingresarAsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla, cantAsignaturasPrerrequisito);
+					if(ingreso) {
+						for(int i=6;i<cantAsignaturasPrerrequisito;i++){
+							String codigoBuscado = partes[i];
+							try {
+								boolean ingresarCodigo = system.asociarCodigosToAsignaturaObligatoria(codigoAsignatura, cantAsignaturasPrerrequisito, codigoBuscado);
+								if(!ingresarCodigo) {
+									System.out.println("No se ingreso el codigo a la lista de asignaturas de la asignatura obligatoria");
+								}
+							}catch (Exception e) {
+								System.out.println("\t"+e.getMessage());
+							}
+						}
+					}
+				}catch (Exception ex) {
+					System.out.println("\t"+ex.getMessage());
+				}
+			}else if(tipoAsignatura.equalsIgnoreCase("Opcional")) {
+				int cantCreditosPrerrequisitos = Integer.parseInt(partes[4]);
+				try {
+					boolean ingresada = system.ingresarAsignaturaOpcional(codigoAsignatura, nombreAsignatura, cantCreditos, cantCreditosPrerrequisitos);
+					if(!ingresada) {
+						System.out.println("No se pudo ingresar la asignatura opcional");
+					}
+				}catch (Exception e) {
+					System.out.println("\t"+e.getMessage());
+				}
+			}
+			//System.out.println(line);
+		}
+		s.close();
+	}
+	
+	
 	public static void leerProfesores(SystemI system) throws FileNotFoundException {
 		Scanner s = new Scanner(new File("Profesores.txt"));
 		while(s.hasNextLine()) {
@@ -25,8 +73,8 @@ public class App {
 			}catch(Exception ex) {
 				System.out.println("\t"+ex.getMessage());
 			}
-			
 		}
+		s.close();
 	}
 	
 	public static void leerParalelos(SystemI system) throws IOException {
@@ -46,10 +94,12 @@ public class App {
 				System.out.println("\t"+ex.getMessage());
 			}
 		}
+		arch.close();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		SystemI system = new SystemImpl();
+		leerAsignaturas(system);
 
 	}
 	

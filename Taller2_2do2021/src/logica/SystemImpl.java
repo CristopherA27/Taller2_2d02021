@@ -38,7 +38,18 @@ public class SystemImpl implements SystemI{
 	}
 	
 	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura, int cantAsignaturasPrerrequisito,String codigoBuscado) {
-		Asignatura asignatura = lasignaturas.buscar(codigoBuscado);
+		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+		if(asig != null && asig instanceof AsignaturaObligatoria) {
+			AsignaturaObligatoria asigObligatoria = (AsignaturaObligatoria)asig;
+			Asignatura asigIngresar = lasignaturas.buscar(codigoBuscado);
+			asigObligatoria.getListaAsignaturas().ingresar(asigIngresar);
+			/*for(int i=0;i<cantAsignaturasPrerrequisito;i++) {
+				Asignatura asigIngresar = lasignaturas.buscar(codigoBuscado);
+				asigObligatoria.getListaAsignaturas().ingresar(asigIngresar);
+			}*/
+		}
+		
+		/*Asignatura asignatura = lasignaturas.buscar(codigoBuscado);
 		if(asignatura != null) {
 			for(int i=0;i<lasignaturas.getCant();i++) {
 				Asignatura asig = lasignaturas.getElementoI(i);
@@ -46,7 +57,7 @@ public class SystemImpl implements SystemI{
 					((AsignaturaObligatoria) asig).getListaAsignaturas().ingresar(asignatura);
 				}
 			}
-		}
+		}*/
 		return false;
 	}
 
