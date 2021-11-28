@@ -16,8 +16,11 @@ public interface SystemI {
 	//Asociar codigos de asignatura a ASIGNATURAOBLIGATORAIA
 	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura,int cantAsignaturasPrerrequisito,String codigoBuscado);
 	
-	public String obtenerAsignaturasDisponibles();
-	public String obtenerParalelosDisponibles();
+	
+	//INICIO MENUS 
+	public String obtenerAsignaturasDisponibles(String rut);
+	public String obtenerParalelosDisponibles(String codigoAsignatura);
+	
 	
 	public boolean inscribirAsignatura(String rutEstudiante,String codigoAsignatura,int numeroParalelo);
 	

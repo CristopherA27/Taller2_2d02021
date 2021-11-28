@@ -135,16 +135,43 @@ public class SystemImpl implements SystemI{
 		return false;
 	}
 
-	@Override
-	public String obtenerAsignaturasDisponibles() {
-		// TODO Auto-generated method stub
-		return null;
+	//esta dudoso
+	public String obtenerAsignaturasDisponibles(String rut) {
+		String dato = "";
+		Persona p = lpersonas.buscar(rut);
+		if(p != null && p instanceof Estudiante) {
+			Estudiante estudiante = (Estudiante)p;
+			for(int i=0;i<lasignaturas.getCant();i++) {
+				Asignatura asig = lasignaturas.getElementoI(i);
+				if(asig instanceof AsignaturaObligatoria) {
+					AsignaturaObligatoria asigObliga = (AsignaturaObligatoria)asig;
+					if(asigObliga.getNivelMalla() == estudiante.getNivelAlumno()) {
+						dato += asigObliga.getCodigoAsignatura()+" "+asigObliga.getNombreAsignatura()+""+asigObliga.getCantCreditos()+" "+asigObliga.getCantAsignaturasPrerrequisito()+"\n";
+						for(int j=0;j<asigObliga.getCantAsignaturasPrerrequisito();j++) {
+							dato +="\t"+asigObliga.getListaAsignaturas().getElementoI(j);
+						}
+					}
+				}else {
+					AsignaturaOpcional asigOpcional = (AsignaturaOpcional)asig;
+					dato += asigOpcional.getCodigoAsignatura()+" "+asigOpcional.getNombreAsignatura()+" "+asigOpcional.getCantCreditos()+" "+asigOpcional.getCantCreditosPrerrequisitos();
+				}
+			}
+		}
+		return dato;
 	}
-
-	@Override
-	public String obtenerParalelosDisponibles() {
-		// TODO Auto-generated method stub
-		return null;
+	//me imagino que esta bien
+	public String obtenerParalelosDisponibles(String codigoAsignatura) {
+		String dato = "";
+		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+		if(asig != null) {
+			for(int i=0;i<lparalelos.getCant();i++) {
+				Paralelo paralelo = lparalelos.getElementoI(i);
+				if(paralelo.getCodigoAsignatura().equals(codigoAsignatura)) {
+					dato += paralelo.getNumeroParalelo()+" "+paralelo.getRutProfesor()+"\n";
+				}
+			}
+		}
+		return dato;
 	}
 
 	@Override
@@ -152,23 +179,45 @@ public class SystemImpl implements SystemI{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
+	
+	//creo que esta bien
 	public String obtenerAsignaturasInscritas(String rutEstudiante) {
-		// TODO Auto-generated method stub
-		return null;
+		String dato = "";
+		Persona p = lpersonas.buscar(rutEstudiante);
+		if(p != null && p instanceof Estudiante) {
+			Estudiante estudiante = (Estudiante)p;
+			ListaAsignaturas la = estudiante.getAsignaturasInscritas();
+			for(int i=0;i<la.getCant();i++) {
+				Asignatura a = la.getElementoI(i);
+				dato += a.getCodigoAsignatura()+" "+a.getNumeroParalelo()+"\n";
+			}
+		}
+		return dato;
 	}
-
+	//verificar
 	@Override
 	public boolean eliminarAsignatura(String rutEstudiante, String codigoAsignatura) {
-		// TODO Auto-generated method stub
+		Persona persona = lpersonas.buscar(rutEstudiante);
+		if(persona != null && persona instanceof Estudiante) {
+			Estudiante estudiante = (Estudiante)persona;
+			estudiante.getAsignaturasInscritas().eliminar(codigoAsignatura);
+		}
 		return false;
 	}
 
-	@Override
+	//mas seguro que los otros
 	public String obtenerParalelosDictados(String rutProfesor) {
-		// TODO Auto-generated method stub
-		return null;
+		String dato = "";
+		Persona p = lpersonas.buscar(rutProfesor);
+		if(p != null && p instanceof Profesor) {
+			Profesor profe = (Profesor)p;
+			ListaParalelos lp = profe.getListaParalelos();
+			for(int i=0;i<lp.getCant();i++) {
+				Paralelo paralelo = lp.getElementoI(i);
+				dato += paralelo.getNumeroParalelo()+" "+paralelo.getCodigoAsignatura()+"\n";
+			}
+		}
+		return dato;
 	}
 
 	@Override
