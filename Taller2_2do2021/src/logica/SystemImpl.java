@@ -102,9 +102,25 @@ public class SystemImpl implements SystemI{
 	}
 
 	@Override
-	public boolean ingresarAsociarParaleloProfesorAsigntura(int numeroParalelo, String codigoAsignatura,
-			String rutProfesor) {
-		// TODO Auto-generated method stub
+	public boolean ingresarAsociarParaleloProfesorAsigntura(int numeroParalelo, String codigoAsignatura,String rutProfesor) {
+		Paralelo paralelo = lparalelos.buscar(numeroParalelo);
+		if(paralelo != null) {
+			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+			if(asig != null) {
+				Persona persona = lpersonas.buscar(rutProfesor);
+				if(persona != null && persona instanceof Profesor) {
+					Profesor profe = (Profesor)persona;
+					paralelo.setCodigoAsignatura(asig);
+					paralelo.setRutProfesor(profe);
+				}else {
+					throw new NullPointerException("");
+				}
+			}else {
+				throw new NullPointerException("La asignatura "+asig+" no existe");
+			}
+		}else {
+			throw new NullPointerException("El paralelo "+paralelo+" no existe");
+		}
 		return false;
 	}
 

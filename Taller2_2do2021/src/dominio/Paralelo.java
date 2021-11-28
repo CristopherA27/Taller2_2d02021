@@ -3,12 +3,12 @@ package dominio;
 public class Paralelo {
 	private int numeroParalelo;
 	private Asignatura codigoAsignatura;
-	private Profesor rut;
+	private Profesor rutProfesor;
 	
 	public Paralelo(int numeroParalelo) {
 		this.numeroParalelo = numeroParalelo;
 		codigoAsignatura = null;
-		rut = null;
+		rutProfesor = null;
 	}
 
 	public int getNumeroParalelo() {
@@ -27,13 +27,14 @@ public class Paralelo {
 		this.codigoAsignatura = codigoAsignatura;
 	}
 
-	public Profesor getRut() {
-		return rut;
+	public Profesor getRutProfesor() {
+		return rutProfesor;
 	}
 
-	public void setRut(Profesor rut) {
-		this.rut = rut;
+	public void setRutProfesor(Profesor rutProfesor) {
+		this.rutProfesor = rutProfesor;
 	}
+
 	
 
 }
