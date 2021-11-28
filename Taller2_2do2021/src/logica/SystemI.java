@@ -9,7 +9,7 @@ public interface SystemI {
 	public boolean ingresarAsignaturaOpcional(String codigoAsignatura, String nombreAsignatura, int cantCreditos,int cantCreditosPrerrequisitos);
 	public boolean ingresarParalelo(int numeroParalelo);
 	public boolean ingresarAsociarAsignaturaCursada(String rutEstudiante,String codigoAsignatura,double notaFinal);
-	public boolean ingresarAsociarAsignaturaInscrita(String rutEstudiante,String codigoAsignatura,int numeroParalelo)
+	public boolean ingresarAsociarAsignaturaInscrita(String rutEstudiante,String codigoAsignatura,int numeroParalelo);
 
 	public boolean ingresarAsociarParaleloProfesorAsigntura(int numeroParalelo,String codigoAsignatura,String rutProfesor);
 	
