@@ -25,12 +25,14 @@ public interface SystemI {
 	public boolean inscribirAsignatura(String rutEstudiante,String codigoAsignatura,int numeroParalelo);
 	
 	public String obtenerAsignaturasInscritas(String rutEstudiante);
-	
 	public boolean eliminarAsignatura(String rutEstudiante,String codigoAsignatura);
+	
 	
 	public String obtenerParalelosDictados(String rutProfesor);
 	public String obtenerAlumnosDeParalelo(int numeroParalelo,String rutProfesor);
 	
+	
+	public String obtenerAsignaturasProfesor(String rutProfesor);
 	public boolean ingresarNotaFinal(String codigoAsignatura,String rutEstudiante,double notaFinal);
 	public boolean verificarAsignaturaInscritaACursada(String ruteEstudiante,String codigoAsignatura);
 	

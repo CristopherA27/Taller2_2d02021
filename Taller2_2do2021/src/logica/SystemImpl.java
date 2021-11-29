@@ -222,13 +222,46 @@ public class SystemImpl implements SystemI{
 
 	@Override
 	public String obtenerAlumnosDeParalelo(int numeroParalelo, String rutProfesor) {
-		// TODO Auto-generated method stub
+		String dato = "";
+		Paralelo paralelo = lparalelos.buscar(numeroParalelo);
+		if(paralelo != null) {
+			dato +="Los estudiantes inscritos son:"+"\n";
+			for(int i=0;i<lpersonas.getCant();i++) {
+				Persona p = lpersonas.getElemento(i);
+				if(p instanceof Estudiante) {
+					Estudiante estudiante = (Estudiante)p;
+					ListaAsignaturas la = estudiante.getAsignaturasInscritas();
+					for(int j=0;j<la.getCant();j++) {
+						Asignatura asig = la.getElementoI(j);
+						if(asig.getNumeroParalelo().equals(numeroParalelo)) {
+							dato +="\t"+estudiante.getRut()+"\n";
+						}
+					}
+				}
+			}
+		}
+		return dato;
+	}
+	
+	
+	public String obtenerAsignaturasProfesor(String rutProfesor) {
+		Persona p = lpersonas.buscar(rutProfesor);
+		if( p != null) {
+			if( p instanceof Profesor) {
+				Profesor profe = (Profesor)p;
+				ListaAsignaturas laProfe = profe.getListaAsignaturas();
+				
+			}
+		}	
 		return null;
 	}
 
 	@Override
 	public boolean ingresarNotaFinal(String codigoAsignatura, String rutEstudiante, double notaFinal) {
-		// TODO Auto-generated method stub
+		Persona p = lpersonas.buscar(rutEstudiante);
+		if( p != null) {
+			
+		}
 		return false;
 	}
 
