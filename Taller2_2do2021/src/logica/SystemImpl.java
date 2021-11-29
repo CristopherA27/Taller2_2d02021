@@ -245,15 +245,19 @@ public class SystemImpl implements SystemI{
 	
 	
 	public String obtenerAsignaturasProfesor(String rutProfesor) {
+		String dato ="";
 		Persona p = lpersonas.buscar(rutProfesor);
 		if( p != null) {
 			if( p instanceof Profesor) {
 				Profesor profe = (Profesor)p;
 				ListaAsignaturas laProfe = profe.getListaAsignaturas();
-				
+				for(int i=0;i<laProfe.getCant();i++) {
+					Asignatura asig = laProfe.getElementoI(i);
+					dato +=asig.getCodigoAsignatura()+" "+asig.getNumeroParalelo()+"\n";
+				}
 			}
 		}	
-		return null;
+		return dato;
 	}
 
 	@Override
