@@ -50,7 +50,7 @@ public class App {
 					System.out.println("\t"+e.getMessage());
 				}
 			}
-			//System.out.println(line);
+			System.out.println(line);
 		}
 		s.close();
 	}
