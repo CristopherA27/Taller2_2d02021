@@ -41,25 +41,28 @@ public class SystemImpl implements SystemI{
 		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
 		if(asig != null && asig instanceof AsignaturaObligatoria) {
 			AsignaturaObligatoria asigObligatoria = (AsignaturaObligatoria)asig;
-			Asignatura asigIngresar = lasignaturas.buscar(codigoBuscado);
-			asigObligatoria.getListaAsignaturas().ingresar(asigIngresar);
-			/*for(int i=0;i<cantAsignaturasPrerrequisito;i++) {
-				Asignatura asigIngresar = lasignaturas.buscar(codigoBuscado);
-				asigObligatoria.getListaAsignaturas().ingresar(asigIngresar);
-			}*/
+			asigObligatoria.añadirCodigo(codigoBuscado);
+		}else {
+			throw new NullPointerException("La asignatura "+asig+" no existe");
 		}
-		
-		/*Asignatura asignatura = lasignaturas.buscar(codigoBuscado);
-		if(asignatura != null) {
-			for(int i=0;i<lasignaturas.getCant();i++) {
-				Asignatura asig = lasignaturas.getElementoI(i);
-				if(asig instanceof AsignaturaObligatoria && asig.getCodigoAsignatura().equalsIgnoreCase( codigoAsignatura)) {
-					((AsignaturaObligatoria) asig).getListaAsignaturas().ingresar(asignatura);
-				}
-			}
-		}*/
 		return false;
 	}
+	
+	/*public boolean añadirCodeToAsignatura() {
+		for(int i=0;i<lasignaturas.getCant();i++) {
+			Asignatura asig = lasignaturas.getElementoI(i);
+			if(asig instanceof AsignaturaObligatoria) {
+				AsignaturaObligatoria asigO = (AsignaturaObligatoria)asig;
+				String [] codigos = asigO.getLcodigosPrerrequisitos();
+				for(int j=0;j<codigos.length;i++) {
+					Asignatura asi = asigO.
+				}
+			}
+			
+		}
+	}*/
+	
+	
 
 	public boolean ingresarAsignaturaOpcional(String codigoAsignatura, String nombreAsignatura, int cantCreditos,
 			int cantCreditosPrerrequisitos) {
@@ -148,7 +151,7 @@ public class SystemImpl implements SystemI{
 					if(asigObliga.getNivelMalla() == estudiante.getNivelAlumno()) {
 						dato += asigObliga.getCodigoAsignatura()+" "+asigObliga.getNombreAsignatura()+""+asigObliga.getCantCreditos()+" "+asigObliga.getCantAsignaturasPrerrequisito()+"\n";
 						for(int j=0;j<asigObliga.getCantAsignaturasPrerrequisito();j++) {
-							dato +="\t"+asigObliga.getListaAsignaturas().getElementoI(j);
+							dato +="\t"+asigObliga.getLcodigosPrerrequisitos();
 						}
 					}
 				}else {
