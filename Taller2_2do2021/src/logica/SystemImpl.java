@@ -224,7 +224,7 @@ public class SystemImpl implements SystemI{
 	public String obtenerAlumnosDeParalelo(int numeroParalelo, String rutProfesor) {
 		String dato = "";
 		Paralelo paralelo = lparalelos.buscar(numeroParalelo);
-		if(paralelo != null) {
+		 if(paralelo != null) {
 			dato +="Los estudiantes inscritos son:"+"\n";
 			for(int i=0;i<lpersonas.getCant();i++) {
 				Persona p = lpersonas.getElemento(i);
@@ -242,7 +242,6 @@ public class SystemImpl implements SystemI{
 		}
 		return dato;
 	}
-	
 	
 	public String obtenerAsignaturasProfesor(String rutProfesor) {
 		String dato ="";
@@ -262,10 +261,11 @@ public class SystemImpl implements SystemI{
 
 	@Override
 	public boolean ingresarNotaFinal(String codigoAsignatura, String rutEstudiante, double notaFinal) {
-		Persona p = lpersonas.buscar(rutEstudiante);
-		if( p != null) {
+		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+		if(asig != null) {
 			
 		}
+		
 		return false;
 	}
 
