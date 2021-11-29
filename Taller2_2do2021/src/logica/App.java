@@ -97,9 +97,11 @@ public class App {
 		arch.close();
 	}
 
+	
 	public static void main(String[] args) throws IOException {
 		SystemI system = new SystemImpl();
 		leerAsignaturas(system);
+		System.out.println();
 
 	}
 	
