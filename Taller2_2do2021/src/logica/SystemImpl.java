@@ -255,7 +255,9 @@ public class SystemImpl implements SystemI{
 					dato +=asig.getCodigoAsignatura()+" "+asig.getNumeroParalelo()+"\n";
 				}
 			}
-		}	
+		}else {
+			throw new NullPointerException("La persona "+p+"no existe");
+		}
 		return dato;
 	}
 
@@ -263,21 +265,45 @@ public class SystemImpl implements SystemI{
 	public boolean ingresarNotaFinal(String codigoAsignatura, String rutEstudiante, double notaFinal) {
 		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
 		if(asig != null) {
-			
+			Persona p = lpersonas.buscar(rutEstudiante);
+			if( p != null && p instanceof Estudiante) {
+				Estudiante estudiante = (Estudiante)p;
+				if(estudiante.getAsignaturasInscritas().buscar(codigoAsignatura).equals(asig)) {
+					asig.setNotaFinal(notaFinal);
+				}
+			}else {
+				throw new NullPointerException("La persona "+p+" no existe");
+			}
+		}else {
+			throw new NullPointerException("La asignatura "+asig+" no existe");
 		}
 		
 		return false;
 	}
 
 	@Override
-	public boolean verificarAsignaturaInscritaACursada(String ruteEstudiante, String codigoAsignatura) {
-		// TODO Auto-generated method stub
+	public boolean verificarAsignaturaInscritaACursada(String rutEstudiante, String codigoAsignatura) {
+		Persona p = lpersonas.buscar(rutEstudiante);
+		if(p != null) {
+			if(p instanceof Estudiante) {
+				Estudiante estudiante = (Estudiante)p;
+				ListaAsignaturas linscritas = estudiante.getAsignaturasInscritas();
+				for(int i=0;i<linscritas.getCant();i++) {
+					Asignatura asig = linscritas.getElementoI(i);
+					if(asig.getNotaFinal()  >= 3.95) {
+						linscritas.eliminar(asig.getCodigoAsignatura());
+						estudiante.getAsignaturasCursadas().ingresar(asig);
+					}
+				}
+					
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public boolean eliminarEstudiante() {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 	

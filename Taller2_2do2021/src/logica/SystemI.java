@@ -34,7 +34,7 @@ public interface SystemI {
 	
 	public String obtenerAsignaturasProfesor(String rutProfesor);
 	public boolean ingresarNotaFinal(String codigoAsignatura,String rutEstudiante,double notaFinal);
-	public boolean verificarAsignaturaInscritaACursada(String ruteEstudiante,String codigoAsignatura);
+	public boolean verificarAsignaturaInscritaACursada(String rutEstudiante,String codigoAsignatura);
 	
 	public boolean eliminarEstudiante();
 	
