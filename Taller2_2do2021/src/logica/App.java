@@ -10,7 +10,7 @@ public class App {
 	
 	public static void leerAsignaturas(SystemI system) throws FileNotFoundException {
 		Scanner s = new Scanner(new File("Asignaturas.txt"));
-		System.out.println("Leyendo asignaturas");
+		//System.out.println("Leyendo asignaturas");
 		while(s.hasNextLine()) {
 			String line = s.nextLine();
 			String [] partes = line.split(",");
@@ -50,22 +50,38 @@ public class App {
 					System.out.println("\t"+e.getMessage());
 				}
 			}
-			System.out.println(line);
+			//System.out.println(line);
 		}
 		system.añadirCodeToAsignatura();
 		s.close();
 	}
 	
+	public static String rutMejorado(String rutNormal){
+		String remplazado = rutNormal.replace(".","");
+		remplazado = remplazado.replace("-","");
+		remplazado = remplazado.replace("K","k");
+		return remplazado;
+	}
+	
+	public static String correoMejorado(String correo) {
+		String remplazo = correo.replace("@","");
+		remplazo = correo.replace(".","");
+		return remplazo;
+	}
+	
 	public static void leerEstudiantes(SystemI system) throws FileNotFoundException{
+		System.out.println("Leyendo Estudiantes");
 		Scanner s = new Scanner(new File("Estudiantes.txt"));
 		while(s.hasNextLine()) {
 			String linea = s.nextLine();
 			String [] partes = linea.split(",");
 			String rut = partes[0];
 			String correo = partes[1];
+			correo = correoMejorado(correo);
+			correo = partes[1];
 			int nivelAlumno = Integer.parseInt(partes[2]);
 			String contraseña = partes[3];
-			s.nextLine();
+			//s.nextLine();
 			try {
 				boolean ingresoEstudiante = system.ingresarEstudiante(rut, correo, contraseña, nivelAlumno);
 				if(ingresoEstudiante) {
@@ -73,7 +89,7 @@ public class App {
 					String [] partes2 = linea.split(",");
 					int cantAsignaturasCursadas = Integer.parseInt(partes[0]);
 					for(int i=0;i<cantAsignaturasCursadas;i++) {
-						s.nextLine();
+						//s.nextLine();
 						linea= s.nextLine();
 						String [] partes3 = linea.split(",");
 						String codigo = partes3[0];
@@ -87,12 +103,12 @@ public class App {
 							System.out.println(e.getMessage());
 						}
 					}
-					s.nextLine();
+					//s.nextLine();
 					linea = s.nextLine();
 					String [] partes4 = linea.split(",");
 					int cantAsigInscritas = Integer.parseInt(partes4[0]);
 					for(int j=0;j<cantAsigInscritas;j++) {
-						s.nextLine();
+						//s.nextLine();
 						linea = s.nextLine();
 						String [] partes5 = linea.split(",");
 						String codigoAsignatura =partes5[0];
@@ -114,15 +130,6 @@ public class App {
 		}
 		s.close();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public static void leerProfesores(SystemI system) throws FileNotFoundException {
 		Scanner s = new Scanner(new File("Profesores.txt"));
@@ -146,20 +153,27 @@ public class App {
 	}
 	
 	public static void leerParalelos(SystemI system) throws IOException {
-		System.out.println("Leyendo paralelos");
+		//System.out.println("Leyendo paralelos");
 		ArchivoEntrada arch = new ArchivoEntrada("Paralelos.txt");
 		while(!arch.isEndFile()) {
 			Registro reg = arch.getRegistro();
 			int numeroParalelo = reg.getInt();
-			String codigoAsignatura = reg.getString();
-			String rutProfesor = reg.getString();
 			try {
-				boolean ingresoAsocia = system.ingresarAsociarParaleloProfesorAsigntura(numeroParalelo, codigoAsignatura, rutProfesor);
-				if(!ingresoAsocia) {
-					System.out.println("No existe espacio para ingresar mas paralelos");
+				boolean ingresoParalelo = system.ingresarParalelo(numeroParalelo);
+				if(ingresoParalelo) {
+					String codigoAsignatura = reg.getString();
+					String rutProfesor = reg.getString();
+					try {
+						boolean ingresoAsocia = system.ingresarAsociarParaleloProfesorAsigntura(numeroParalelo, codigoAsignatura, rutProfesor);
+						if(!ingresoAsocia) {
+							System.out.println("No existe espacio para ingresar mas paralelos");
+						}
+					}catch(Exception ex) {
+						System.out.println("\t"+ex.getMessage());
+					}
 				}
-			}catch(Exception ex) {
-				System.out.println("\t"+ex.getMessage());
+			}catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		arch.close();
@@ -169,7 +183,9 @@ public class App {
 	public static void main(String[] args) throws IOException {
 		SystemI system = new SystemImpl();
 		leerAsignaturas(system);
-		System.out.println();
+		leerParalelos(system);
+		leerEstudiantes(system);
+		leerProfesores(system);
 
 	}
 	
