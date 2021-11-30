@@ -182,7 +182,6 @@ public class SystemImpl implements SystemI{
 				//aca me quede	
 				}else {
 					AsignaturaOpcional asigOpcional = (AsignaturaOpcional)asig;
-					
 					for(int k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
 						if(estudiante.getAsignaturasCursadas().getElementoI(k).getCodigoAsignatura() != asigOpcional.getCodigoAsignatura()) {
 							dato += asigOpcional.getCodigoAsignatura()+" "+asigOpcional.getNombreAsignatura()+" "+asigOpcional.getCantCreditos()+" "+asigOpcional.getCantCreditosPrerrequisitos();
@@ -190,13 +189,8 @@ public class SystemImpl implements SystemI{
 					}
 				}
 			}
-			for(int k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
-				if(estudiante.getAsignaturasCursadas().getElementoI(k).getNotaFinal() <3.95) {
-					dato += estudiante.getAsignaturasCursadas().getElementoI(k).getCodigoAsignatura();
-				}
-			}
 		}
-		return null;
+		return dato;
 	}
 	
 	

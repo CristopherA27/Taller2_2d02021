@@ -182,7 +182,8 @@ public class App {
 		leerParalelos(system);
 		leerEstudiantes(system);
 		leerProfesores(system);
-		
+		String rut = "123456k";
+		System.out.println(system.obtenerAsignaturasDisponibles(rut));
 	}
 	
 	
