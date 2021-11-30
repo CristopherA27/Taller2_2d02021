@@ -56,6 +56,74 @@ public class App {
 		s.close();
 	}
 	
+	public static void leerEstudiantes(SystemI system) throws FileNotFoundException{
+		Scanner s = new Scanner(new File("Estudiantes.txt"));
+		while(s.hasNextLine()) {
+			String linea = s.nextLine();
+			String [] partes = linea.split(",");
+			String rut = partes[0];
+			String correo = partes[1];
+			int nivelAlumno = Integer.parseInt(partes[2]);
+			String contraseña = partes[3];
+			s.nextLine();
+			try {
+				boolean ingresoEstudiante = system.ingresarEstudiante(rut, correo, contraseña, nivelAlumno);
+				if(ingresoEstudiante) {
+					linea = s.nextLine();
+					String [] partes2 = linea.split(",");
+					int cantAsignaturasCursadas = Integer.parseInt(partes[0]);
+					for(int i=0;i<cantAsignaturasCursadas;i++) {
+						s.nextLine();
+						linea= s.nextLine();
+						String [] partes3 = linea.split(",");
+						String codigo = partes3[0];
+						double notaFinal = Double.parseDouble(partes[1]);
+						try {
+							boolean ingresoCursada = system.ingresarAsociarAsignaturaCursada(rut, codigo, notaFinal);
+							if(!ingresoCursada) {
+								System.out.println("No se pudo ingresar la asignatura cursada");
+							}
+						}catch (Exception e) {
+							System.out.println(e.getMessage());
+						}
+					}
+					s.nextLine();
+					linea = s.nextLine();
+					String [] partes4 = linea.split(",");
+					int cantAsigInscritas = Integer.parseInt(partes4[0]);
+					for(int j=0;j<cantAsigInscritas;j++) {
+						s.nextLine();
+						linea = s.nextLine();
+						String [] partes5 = linea.split(",");
+						String codigoAsignatura =partes5[0];
+						int numeroParalelo = Integer.parseInt(partes5[1]);
+						try {
+							boolean ingresoInscrita = system.ingresarAsociarAsignaturaInscrita(rut, codigoAsignatura, numeroParalelo);
+							if(!ingresoInscrita) {
+								System.out.println("No se pudo ingresar la asignatura Inscrita+-");
+							}
+						}catch (Exception e) {
+							System.out.println(e.getMessage());
+						}
+					}
+				}
+			}catch (Exception ex) {
+				System.out.println("\t"+ex.getMessage());
+			}
+			System.out.println(linea);
+		}
+		s.close();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void leerProfesores(SystemI system) throws FileNotFoundException {
 		Scanner s = new Scanner(new File("Profesores.txt"));
 		while(s.hasNextLine()) {
