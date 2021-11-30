@@ -51,18 +51,6 @@ public class SystemImpl implements SystemI{
 		
 	}
 	
-	
-	/*
-	 public boolean a(String codigoAsignatura,String codigoBuscado) {
-			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
-				if(asig != null && asig instanceof AsignaturaObligatoria) {
-				  AsignaturaObligatoria asigObligatoria = (AsignaturaObligatoria)asig;
-					asigObligatoria.addCodigosPre(codigoBuscado);
-				}
-		  }
-	*/
-	public static Scanner s = new Scanner(System.in);
-	
 	public void añadirCodeToAsignatura() {
 		for(int i=0;i<lasignaturas.getCant();i++) {
 			Asignatura asig = lasignaturas.getElementoI(i);
@@ -97,37 +85,41 @@ public class SystemImpl implements SystemI{
 	public boolean ingresarAsociarAsignaturaCursada(String rutEstudiante, String codigoAsignatura, double notaFinal) {
 		Persona persona = lpersonas.buscar(rutEstudiante);
 		if(persona != null && persona instanceof Estudiante) {
+			Estudiante estudiante = (Estudiante) persona;
 			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
 			if(asig != null) {
-				Estudiante estudiante = (Estudiante) persona;
 				estudiante.getAsignaturasCursadas().ingresar(asig);
 				estudiante.getAsignaturasCursadas().buscar(codigoAsignatura).setNotaFinal(notaFinal);
+				return true;
 			}else {
 				throw new NullPointerException("La "+asig+" no existe");
 			}
+		}else {
+			throw new NullPointerException("El estudiante "+persona+" no existe");
 		}
-		return false;
 	}
 	
 	public boolean ingresarAsociarAsignaturaInscrita (String rutEstudiante,String codigoAsignatura,int numeroParalelo) {
 		Persona persona = lpersonas.buscar(rutEstudiante);
 		if(persona != null  && persona instanceof Estudiante) {
+			Estudiante estudiante = (Estudiante) persona;
 			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
 			if(asig != null) {
-				Estudiante estudiante = (Estudiante) persona;
 				estudiante.getAsignaturasInscritas().ingresar(asig);
 				Paralelo numParalelo = lparalelos.buscar(numeroParalelo);
 				if(numeroParalelo != 0) {
 					estudiante.getAsignaturasInscritas().buscar(codigoAsignatura).setNumeroParalelo(numParalelo);
+					numParalelo.getListaPersonas().ingresar(estudiante);
+					return true;
 				}else {
 					throw new NullPointerException("El "+numeroParalelo+" no existe");
 				}
 			}else {
 				throw new NullPointerException("La "+asig+" no existe");
 			}
+		}else {
+			throw new NullPointerException("El estudiante "+persona+" no existe");
 		}
-		
-		return false;        
 	}
 
 	@Override
@@ -141,6 +133,7 @@ public class SystemImpl implements SystemI{
 					Profesor profe = (Profesor)persona;
 					paralelo.setCodigoAsignatura(asig);
 					paralelo.setRutProfesor(profe);
+					return true;
 				}else {
 					throw new NullPointerException("");
 				}
@@ -150,7 +143,6 @@ public class SystemImpl implements SystemI{
 		}else {
 			throw new NullPointerException("El paralelo "+paralelo+" no existe");
 		}
-		return false;
 	}
 
 	//esta dudoso
