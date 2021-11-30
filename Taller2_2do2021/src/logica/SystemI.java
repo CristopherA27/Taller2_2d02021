@@ -14,8 +14,8 @@ public interface SystemI {
 	public boolean ingresarAsociarParaleloProfesorAsigntura(int numeroParalelo,String codigoAsignatura,String rutProfesor);
 	
 	//Asociar codigos de asignatura a ASIGNATURAOBLIGATORAIA
-	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura,int cantAsignaturasPrerrequisito,String codigoBuscado);
-	
+	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura,String codigoBuscado);
+	public void añadirCodeToAsignatura();
 	
 	//INICIO MENUS 
 	public String obtenerAsignaturasDisponibles(String rut);

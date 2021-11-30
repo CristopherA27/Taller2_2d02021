@@ -7,6 +7,7 @@ public class AsignaturaObligatoria extends Asignatura{
 	private int cantCreditos;
 	private int nivelMalla;
 	private int cantAsignaturasPrerrequisito;
+	private ListaAsignaturas listaAsignaturas;
 	private String [] lcodigosPrerrequisitos;
 	private int preRequisitos = 0;
 	
@@ -17,14 +18,19 @@ public class AsignaturaObligatoria extends Asignatura{
 		this.cantCreditos = cantCreditos;
 		this.nivelMalla = nivelMalla;
 		this.cantAsignaturasPrerrequisito = cantAsignaturasPrerrequisito;
+		listaAsignaturas = new ListaAsignaturas(cantAsignaturasPrerrequisito);
 		lcodigosPrerrequisitos = new String [cantAsignaturasPrerrequisito];
 	}
 	
-	public void añadirCodigo(String code) {
-		lcodigosPrerrequisitos[preRequisitos]= code;
-		preRequisitos++;
+	public boolean añadirCodigo(String code) {
+		if(preRequisitos <cantAsignaturasPrerrequisito) {
+			lcodigosPrerrequisitos[preRequisitos]= code;
+			preRequisitos++;
+			return true;
+		}
+		return false;
 	}
-	
+
 	public String[] getLcodigosPrerrequisitos() {
 		return lcodigosPrerrequisitos;
 	}
@@ -77,5 +83,9 @@ public class AsignaturaObligatoria extends Asignatura{
 	public void setCantAsignaturasPrerrequisito(int cantAsignaturasPrerrequisito) {
 		this.cantAsignaturasPrerrequisito = cantAsignaturasPrerrequisito;
 	}
-	
+
+	public ListaAsignaturas getListaAsignaturas() {
+		return listaAsignaturas;
+	}
+
 }

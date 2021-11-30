@@ -24,10 +24,10 @@ public class App {
 				try {
 					boolean ingreso=system.ingresarAsignaturaObligatoria(codigoAsignatura, nombreAsignatura, cantCreditos, nivelMalla, cantAsignaturasPrerrequisito);
 					if(ingreso) {
-						for(int i=6;i<cantAsignaturasPrerrequisito;i++){
+						for(int i=6;i<6+cantAsignaturasPrerrequisito;i++){
 							String codigoBuscado = partes[i];
 							try {
-								boolean ingresarCodigo = system.asociarCodigosToAsignaturaObligatoria(codigoAsignatura, cantAsignaturasPrerrequisito, codigoBuscado);
+								boolean ingresarCodigo = system.asociarCodigosToAsignaturaObligatoria(codigoAsignatura, codigoBuscado);
 								if(!ingresarCodigo) {
 									System.out.println("No se ingreso el codigo a la lista de asignaturas de la asignatura obligatoria");
 								}
@@ -52,9 +52,9 @@ public class App {
 			}
 			System.out.println(line);
 		}
+		system.añadirCodeToAsignatura();
 		s.close();
 	}
-	
 	
 	public static void leerProfesores(SystemI system) throws FileNotFoundException {
 		Scanner s = new Scanner(new File("Profesores.txt"));

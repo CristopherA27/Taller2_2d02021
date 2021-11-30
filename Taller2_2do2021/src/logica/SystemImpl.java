@@ -1,4 +1,6 @@
 package logica;
+import java.util.Scanner;
+
 import dominio.*;
         
 
@@ -37,33 +39,45 @@ public class SystemImpl implements SystemI{
 	
 	}
 	
-	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura, int cantAsignaturasPrerrequisito,String codigoBuscado) {
+	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura,String codigoBuscado) {
 		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
 		if(asig != null && asig instanceof AsignaturaObligatoria) {
 			AsignaturaObligatoria asigObligatoria = (AsignaturaObligatoria)asig;
-			asigObligatoria.añadirCodigo(codigoBuscado);
+			boolean a =asigObligatoria.añadirCodigo(codigoBuscado);
+			return true;
 		}else {
 			throw new NullPointerException("La asignatura "+asig+" no existe");
 		}
-		return false;
+		
 	}
 	
 	
-	/*public boolean añadirCodeToAsignatura() {
+	/*
+	 public boolean a(String codigoAsignatura,String codigoBuscado) {
+			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+				if(asig != null && asig instanceof AsignaturaObligatoria) {
+				  AsignaturaObligatoria asigObligatoria = (AsignaturaObligatoria)asig;
+					asigObligatoria.addCodigosPre(codigoBuscado);
+				}
+		  }
+	*/
+	public static Scanner s = new Scanner(System.in);
+	
+	public void añadirCodeToAsignatura() {
 		for(int i=0;i<lasignaturas.getCant();i++) {
 			Asignatura asig = lasignaturas.getElementoI(i);
 			if(asig instanceof AsignaturaObligatoria) {
 				AsignaturaObligatoria asigO = (AsignaturaObligatoria)asig;
 				String [] codigos = asigO.getLcodigosPrerrequisitos();
-				for(int j=0;j<codigos.length;i++) {
-					Asignatura asi = asigO.
+				for(int j=0;j<codigos.length;j++) {
+					Asignatura asi = lasignaturas.buscar(codigos[j]);
+					if(asi != null) {
+						asigO.getListaAsignaturas().ingresar(asi);
+					}
 				}
 			}
-			
 		}
-	}*/
-	
-	
+	}
 
 	public boolean ingresarAsignaturaOpcional(String codigoAsignatura, String nombreAsignatura, int cantCreditos,
 			int cantCreditosPrerrequisitos) {
