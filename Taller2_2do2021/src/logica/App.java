@@ -76,24 +76,21 @@ public class App {
 			String linea = s.nextLine();
 			String [] partes = linea.split(",");
 			String rut = partes[0];
-			String correo = partes[1];
-			correo = correoMejorado(correo);
-			correo = partes[1];
+			String correo = partes[1];			
 			int nivelAlumno = Integer.parseInt(partes[2]);
 			String contraseña = partes[3];
-			//s.nextLine();
+			System.out.println(linea);
 			try {
 				boolean ingresoEstudiante = system.ingresarEstudiante(rut, correo, contraseña, nivelAlumno);
 				if(ingresoEstudiante) {
 					linea = s.nextLine();
-					String [] partes2 = linea.split(",");
-					int cantAsignaturasCursadas = Integer.parseInt(partes[0]);
+					int cantAsignaturasCursadas = Integer.parseInt(linea);
+					System.out.println(linea);
 					for(int i=0;i<cantAsignaturasCursadas;i++) {
-						//s.nextLine();
 						linea= s.nextLine();
 						String [] partes3 = linea.split(",");
 						String codigo = partes3[0];
-						double notaFinal = Double.parseDouble(partes[1]);
+						double notaFinal = Double.parseDouble(partes3[1]);
 						try {
 							boolean ingresoCursada = system.ingresarAsociarAsignaturaCursada(rut, codigo, notaFinal);
 							if(!ingresoCursada) {
@@ -102,13 +99,12 @@ public class App {
 						}catch (Exception e) {
 							System.out.println(e.getMessage());
 						}
+						System.out.println(linea);
 					}
-					//s.nextLine();
 					linea = s.nextLine();
-					String [] partes4 = linea.split(",");
-					int cantAsigInscritas = Integer.parseInt(partes4[0]);
+					int cantAsigInscritas = Integer.parseInt(linea);
+					System.out.println(linea);
 					for(int j=0;j<cantAsigInscritas;j++) {
-						//s.nextLine();
 						linea = s.nextLine();
 						String [] partes5 = linea.split(",");
 						String codigoAsignatura =partes5[0];
@@ -121,12 +117,12 @@ public class App {
 						}catch (Exception e) {
 							System.out.println(e.getMessage());
 						}
+						System.out.println(linea);
 					}
 				}
 			}catch (Exception ex) {
 				System.out.println("\t"+ex.getMessage());
 			}
-			System.out.println(linea);
 		}
 		s.close();
 	}

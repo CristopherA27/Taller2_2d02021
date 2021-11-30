@@ -3,6 +3,7 @@ import logica.*;
 
 public class Estudiante extends Persona{
 	private int nivelAlumno;
+	private int creditos ;
 	private ListaAsignaturas asignaturasCursadas;
 	private ListaAsignaturas asignaturasInscritas;
 
@@ -11,7 +12,19 @@ public class Estudiante extends Persona{
 		nivelAlumno =0;
 		asignaturasCursadas = new ListaAsignaturas(100);
 		asignaturasInscritas = new ListaAsignaturas(100);
+		creditos =0;
 	}
+
+	public int getCreditos() {
+		return creditos;
+	}
+
+
+	public void setCreditos(int creditos) {
+		this.creditos = creditos;
+	}
+
+
 	public int getNivelAlumno() {
 		return nivelAlumno;
 	}

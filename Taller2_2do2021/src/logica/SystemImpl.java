@@ -144,7 +144,52 @@ public class SystemImpl implements SystemI{
 		}
 	}
 
+	public String obtenerAsignaturasDisponibles(String rut) {
+		String dato = "";
+		Persona p = lpersonas.buscar(rut);
+		if(p != null && p instanceof Estudiante) {
+			Estudiante estudiante = (Estudiante)p;
+			for(int i=0;i<lasignaturas.getCant();i++) {
+				Asignatura asig = lasignaturas.getElementoI(i);
+				if(asig instanceof AsignaturaObligatoria) {
+					AsignaturaObligatoria asigObli = (AsignaturaObligatoria)asig;
+					for(int j=0;j<estudiante.getAsignaturasCursadas().getCant();j++) {
+						//Asignatura asigEstudiante
+					}
+					
+					
+					
+					
+					
+					
+					if(asigObli.getNivelMalla() ==estudiante.getNivelAlumno() && estudiante.getCreditos() <40 ) {
+						dato += asigObli.getCodigoAsignatura()+" "+asigObli.getNombreAsignatura()+" "+asigObli.getCantCreditos()+" "+asigObli.getCantAsignaturasPrerrequisito();
+						for(int j=0;j<asigObli.getPreRequisitos();j++) {
+							dato+= asigObli.getListaAsignaturas().getElementoI(j);
+						}
+					}
+				}else {
+					AsignaturaOpcional asigOpcional = (AsignaturaOpcional)asig;
+					for(int k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
+						if(estudiante.getAsignaturasCursadas().getElementoI(k).getCodigoAsignatura() != asigOpcional.getCodigoAsignatura()) {
+							dato += asigOpcional.getCodigoAsignatura()+" "+asigOpcional.getNombreAsignatura()+" "+asigOpcional.getCantCreditos()+" "+asigOpcional.getCantCreditosPrerrequisitos();
+						}
+					}
+				}
+			}
+			for(int k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
+				if(estudiante.getAsignaturasCursadas().getElementoI(k).getNotaFinal() <3.95) {
+					dato += estudiante.getAsignaturasCursadas().getElementoI(k).getCodigoAsignatura();
+				}
+			}
+		}
+		return null;
+	}
+	
+	
 	//esta dudoso
+
+	/*
 	public String obtenerAsignaturasDisponibles(String rut) {
 		String dato = "";
 		Persona p = lpersonas.buscar(rut);
@@ -157,17 +202,19 @@ public class SystemImpl implements SystemI{
 					if(asigObliga.getNivelMalla() == estudiante.getNivelAlumno()) {
 						dato += asigObliga.getCodigoAsignatura()+" "+asigObliga.getNombreAsignatura()+""+asigObliga.getCantCreditos()+" "+asigObliga.getCantAsignaturasPrerrequisito()+"\n";
 						for(int j=0;j<asigObliga.getCantAsignaturasPrerrequisito();j++) {
-							dato +="\t"+asigObliga.getLcodigosPrerrequisitos();
+							dato +="\t"+asigObliga.getListaAsignaturas().getElementoI(j);
 						}
 					}
 				}else {
 					AsignaturaOpcional asigOpcional = (AsignaturaOpcional)asig;
+					for(int k=0)
 					dato += asigOpcional.getCodigoAsignatura()+" "+asigOpcional.getNombreAsignatura()+" "+asigOpcional.getCantCreditos()+" "+asigOpcional.getCantCreditosPrerrequisitos();
 				}
 			}
 		}
 		return dato;
-	}
+	}*/
+	
 	//me imagino que esta bien
 	public String obtenerParalelosDisponibles(String codigoAsignatura) {
 		String dato = "";
