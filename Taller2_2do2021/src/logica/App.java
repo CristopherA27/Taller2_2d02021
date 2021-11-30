@@ -55,7 +55,7 @@ public class App {
 		system.añadirCodeToAsignatura();
 		s.close();
 	}
-	
+	/*
 	public static String rutMejorado(String rutNormal){
 		String remplazado = rutNormal.replace(".","");
 		remplazado = remplazado.replace("-","");
@@ -67,10 +67,10 @@ public class App {
 		String remplazo = correo.replace("@","");
 		remplazo = correo.replace(".","");
 		return remplazo;
-	}
+	}*/
 	
 	public static void leerEstudiantes(SystemI system) throws FileNotFoundException{
-		System.out.println("Leyendo Estudiantes");
+		//System.out.println("Leyendo Estudiantes");
 		Scanner s = new Scanner(new File("Estudiantes.txt"));
 		while(s.hasNextLine()) {
 			String linea = s.nextLine();
@@ -79,13 +79,13 @@ public class App {
 			String correo = partes[1];			
 			int nivelAlumno = Integer.parseInt(partes[2]);
 			String contraseña = partes[3];
-			System.out.println(linea);
+			//System.out.println(linea);
 			try {
 				boolean ingresoEstudiante = system.ingresarEstudiante(rut, correo, contraseña, nivelAlumno);
 				if(ingresoEstudiante) {
 					linea = s.nextLine();
 					int cantAsignaturasCursadas = Integer.parseInt(linea);
-					System.out.println(linea);
+					//System.out.println(linea);
 					for(int i=0;i<cantAsignaturasCursadas;i++) {
 						linea= s.nextLine();
 						String [] partes3 = linea.split(",");
@@ -99,11 +99,11 @@ public class App {
 						}catch (Exception e) {
 							System.out.println(e.getMessage());
 						}
-						System.out.println(linea);
+						//System.out.println(linea);
 					}
 					linea = s.nextLine();
 					int cantAsigInscritas = Integer.parseInt(linea);
-					System.out.println(linea);
+					//System.out.println(linea);
 					for(int j=0;j<cantAsigInscritas;j++) {
 						linea = s.nextLine();
 						String [] partes5 = linea.split(",");
@@ -117,7 +117,7 @@ public class App {
 						}catch (Exception e) {
 							System.out.println(e.getMessage());
 						}
-						System.out.println(linea);
+						//System.out.println(linea);
 					}
 				}
 			}catch (Exception ex) {
@@ -182,7 +182,7 @@ public class App {
 		leerParalelos(system);
 		leerEstudiantes(system);
 		leerProfesores(system);
-
+		
 	}
 	
 	

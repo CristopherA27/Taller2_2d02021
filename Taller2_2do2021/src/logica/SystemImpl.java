@@ -154,22 +154,35 @@ public class SystemImpl implements SystemI{
 				if(asig instanceof AsignaturaObligatoria) {
 					AsignaturaObligatoria asigObli = (AsignaturaObligatoria)asig;
 					for(int j=0;j<estudiante.getAsignaturasCursadas().getCant();j++) {
-						//Asignatura asigEstudiante
-					}
-					
-					
-					
-					
-					
-					
-					if(asigObli.getNivelMalla() ==estudiante.getNivelAlumno() && estudiante.getCreditos() <40 ) {
-						dato += asigObli.getCodigoAsignatura()+" "+asigObli.getNombreAsignatura()+" "+asigObli.getCantCreditos()+" "+asigObli.getCantAsignaturasPrerrequisito();
-						for(int j=0;j<asigObli.getPreRequisitos();j++) {
-							dato+= asigObli.getListaAsignaturas().getElementoI(j);
+						Asignatura asigEstudiante = estudiante.getAsignaturasCursadas().getElementoI(j);
+						if(asigEstudiante.getCodigoAsignatura() == asigObli.getCodigoAsignatura() && asigEstudiante.getNotaFinal() <=3.95 ) {
+							dato += asigObli.getCodigoAsignatura()+" "+asigObli.getNombreAsignatura()+" "+asigObli.getCantCreditos()+" "+asigObli.getCantAsignaturasPrerrequisito();
+							for(int a=0;a<asigObli.getCantAsignaturasPrerrequisito();a++) {
+								dato+="\t"+asigObli.getLcodigosPrerrequisitos();
+							}
+						}
+						if(asigObli.getNivelMalla() == estudiante.getNivelAlumno() ) {
+							if(asigEstudiante.getCodigoAsignatura() == asigObli.getCodigoAsignatura() && asigEstudiante.getNotaFinal() <=3.95 ) {
+								dato += asigObli.getCodigoAsignatura()+" "+asigObli.getNombreAsignatura()+" "+asigObli.getCantCreditos()+" "+asigObli.getCantAsignaturasPrerrequisito();
+								for(int a=0;a<asigObli.getCantAsignaturasPrerrequisito();a++) {
+									dato+="\t"+asigObli.getLcodigosPrerrequisitos();
+								}
+							}
 						}
 					}
+					for(int m=0;m<estudiante.getAsignaturasInscritas().getCant();m++) {
+						Asignatura asigEstu = estudiante.getAsignaturasInscritas().getElementoI(m);
+						if(asigEstu.getCodigoAsignatura() != asigObli.getCodigoAsignatura()) {
+							dato += asigObli.getCodigoAsignatura()+" "+asigObli.getNombreAsignatura()+" "+asigObli.getCantCreditos()+" "+asigObli.getCantAsignaturasPrerrequisito();
+							for(int a=0;a<asigObli.getCantAsignaturasPrerrequisito();a++) {
+								dato+="\t"+asigObli.getLcodigosPrerrequisitos();
+							}
+						}
+					}
+				//aca me quede	
 				}else {
 					AsignaturaOpcional asigOpcional = (AsignaturaOpcional)asig;
+					
 					for(int k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
 						if(estudiante.getAsignaturasCursadas().getElementoI(k).getCodigoAsignatura() != asigOpcional.getCodigoAsignatura()) {
 							dato += asigOpcional.getCodigoAsignatura()+" "+asigOpcional.getNombreAsignatura()+" "+asigOpcional.getCantCreditos()+" "+asigOpcional.getCantCreditosPrerrequisitos();
