@@ -153,13 +153,11 @@ public class SystemImpl implements SystemI{
 				Asignatura asig = lasignaturas.getElementoI(i);
 				if(asig instanceof AsignaturaOpcional) {
 					AsignaturaOpcional asigOp = (AsignaturaOpcional)asig;
-					boolean encontrado=false;
 					int k;
 					for(k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
 						Asignatura asigCur = estudiante.getAsignaturasCursadas().getElementoI(k);
 						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) && asigCur.getNotaFinal() <3.95 ) {
 							dato += asigOp.getCodigoAsignatura()+" "+asigOp.getNombreAsignatura()+" "+asigOp.getCantCreditos()+" "+asigOp.getCantCreditosPrerrequisitos()+"\n";
-							encontrado = true;
 							break;
 						}
 						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) &&asigCur.getNotaFinal() >=3.95 ) {
