@@ -129,12 +129,22 @@ public class SystemImpl implements SystemI{
 			if(asig != null) {
 				Persona persona = lpersonas.buscar(rutProfesor);
 				if(persona != null && persona instanceof Profesor) {
-					Profesor profe = (Profesor)persona;
-					paralelo.setCodigoAsignatura(asig);
-					paralelo.setRutProfesor(profe);
-					return true;
+					if(asig instanceof AsignaturaObligatoria) {
+						Profesor profe = (Profesor)persona;
+						paralelo.setCodigoAsignatura(asig);
+						paralelo.setRutProfesor(profe);
+						profe.getListaParalelos().ingresar(paralelo);
+						return true;
+					}else {
+						AsignaturaOpcional asigOp = (AsignaturaOpcional)asig;
+						Profesor profe = (Profesor)persona;
+						paralelo.setCodigoAsignatura(asig);
+						paralelo.setRutProfesor(profe);
+						profe.getListaParalelos().ingresar(paralelo);
+						return true;
+					}
 				}else {
-					throw new NullPointerException("");
+					throw new NullPointerException("La persona"+persona+" no existe");
 				}
 			}else {
 				throw new NullPointerException("La asignatura "+asig+" no existe");
@@ -329,7 +339,6 @@ public class SystemImpl implements SystemI{
 		}          
 	}
 
-	//mas seguro que los otros
 	public String obtenerParalelosDictados(String rutProfesor) {
 		String dato = "";
 		Persona p = lpersonas.buscar(rutProfesor);
@@ -347,22 +356,25 @@ public class SystemImpl implements SystemI{
 	@Override
 	public String obtenerAlumnosDeParalelo(int numeroParalelo, String rutProfesor) {
 		String dato = "";
-		Paralelo paralelo = lparalelos.buscar(numeroParalelo);
-		 if(paralelo != null) {
-			dato +="Los estudiantes inscritos son:"+"\n";
-			for(int i=0;i<lpersonas.getCant();i++) {
-				Persona p = lpersonas.getElemento(i);
-				if(p instanceof Estudiante) {
-					Estudiante estudiante = (Estudiante)p;
-					ListaAsignaturas la = estudiante.getAsignaturasInscritas();
-					for(int j=0;j<la.getCant();j++) {
-						Asignatura asig = la.getElementoI(j);
-						if(asig.getNumeroParalelo().equals(numeroParalelo)) {
-							dato +="\t"+estudiante.getRut()+"\n";
-						}
+		Persona p = lpersonas.buscar(rutProfesor);
+		if(p != null && p instanceof Profesor) {
+			Profesor profe = (Profesor)p;
+			Paralelo paralelo = profe.getListaParalelos().buscar(numeroParalelo);
+			if(paralelo != null) {
+				dato+= "Los alumnos del paralelo son: "+"\n";
+				ListaPersonas le = paralelo.getListaEstudiantes();
+				for(int i=0;i<le.getCant();i++) {
+					Persona personaParalelo = le.getElemento(i);
+					if(personaParalelo instanceof Estudiante) {
+						Estudiante e = (Estudiante)personaParalelo;
+						dato+= "\tRut Estudiante: "+e.getRut()+" Correo: "+e.getCorreo()+"\n";
 					}
 				}
+			}else {
+				throw new NullPointerException("El paralelo "+paralelo+" no existe");
 			}
+		}else {
+			throw new NullPointerException("El profesor "+p+" no existe");
 		}
 		return dato;
 	}
