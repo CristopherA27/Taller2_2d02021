@@ -30,6 +30,10 @@ public class AsignaturaObligatoria extends Asignatura{
 		}
 		return false;
 	}
+	
+	public String getCodigoPre(int i) {
+		return lcodigosPrerrequisitos[i];
+	}
 
 	public String[] getLcodigosPrerrequisitos() {
 		return lcodigosPrerrequisitos;

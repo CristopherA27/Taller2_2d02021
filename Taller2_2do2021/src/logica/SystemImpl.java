@@ -238,8 +238,9 @@ public class SystemImpl implements SystemI{
 		if(asig != null) {
 			for(int i=0;i<lparalelos.getCant();i++) {
 				Paralelo paralelo = lparalelos.getElementoI(i);
-				if(paralelo.getCodigoAsignatura().equals(codigoAsignatura)) {
+				if(paralelo.getCodigoAsignatura().equals(codigoAsignatura) && paralelo.getCantEstudiantes()<100 ) {
 					dato += paralelo.getNumeroParalelo()+" "+paralelo.getRutProfesor()+"\n";
+					paralelo.setCantEstudiantes(paralelo.getCantEstudiantes()+1);
 				}
 			}
 		}
@@ -248,7 +249,52 @@ public class SystemImpl implements SystemI{
 
 	@Override
 	public boolean inscribirAsignatura(String rutEstudiante, String codigoAsignatura, int numeroParalelo) {
-		// TODO Auto-generated method stub
+		Persona p = lpersonas.buscar(rutEstudiante);
+		if(p != null && p instanceof Estudiante) {
+			Estudiante e = (Estudiante)p;
+			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+			if(asig != null) {
+				Paralelo paralelo = lparalelos.buscar(numeroParalelo);
+				if(paralelo != null) {
+					 if(asig instanceof AsignaturaObligatoria) {
+						 AsignaturaObligatoria asigOb = (AsignaturaObligatoria)asig;
+						 int aprobadas =0;
+						 for(int k=0;k<e.getAsignaturasCursadas().getCant();k++) {
+							 for(int i=0;i<asigOb.getLcodigosPrerrequisitos().length;i++) {
+								 String codigo = asigOb.getCodigoPre(i);
+								 if(e.getAsignaturasCursadas().getElementoI(k).getCodigoAsignatura().equals(codigo) && e.getAsignaturasCursadas().getElementoI(k).getNotaFinal() >=3.95) {
+									 aprobadas++;
+								 }
+							 }
+						 }
+						 if(aprobadas == asigOb.getCantAsignaturasPrerrequisito()) {
+							 if(e.getCreditos() < 40 ) {
+								 e.setCreditos(e.getCreditos()+asigOb.getCantCreditos());
+								 e.getAsignaturasInscritas().ingresar(asigOb);
+								 paralelo.getListaEstudiantes().ingresar(e);
+								 asigOb.setNumeroParalelo(paralelo);
+								 return true;
+							 }
+						 } 
+					 }else {
+						 AsignaturaOpcional asigOp =(AsignaturaOpcional)asig;
+						 if(e.getCreditos() > asigOp.getCantCreditosPrerrequisitos() && e.getCreditos() < 40) {
+							 e.getAsignaturasInscritas().ingresar(asigOp);
+							 paralelo.getListaEstudiantes().ingresar(e);
+							 e.setCreditos(e.getCreditos()+asigOp.getCantCreditos());
+							 asigOp.setNumeroParalelo(paralelo);
+							 return true;
+						 }
+					 }
+				}else {
+					throw new NullPointerException("El paralelo "+paralelo+" no existe");
+				}
+			}else {
+				throw new NullPointerException("La asignatura "+asig+" no existe" );
+			}
+		}else {
+			throw new NullPointerException("El estudiante "+p+" no existe");
+		}
 		return false;
 	}
 	
@@ -375,7 +421,28 @@ public class SystemImpl implements SystemI{
 
 	@Override
 	public boolean eliminarEstudiante() {
-		
+		for(int i=0;i<lpersonas.getCant();i++) {
+			Persona p = lpersonas.getElemento(i);
+			if(p instanceof Estudiante) {
+				Estudiante e = (Estudiante)p;
+				if(e.getNivelAlumno() == 10) {
+					//lpersonas.eliminar(e.getRut());
+					for(int k=0;k<lparalelos.getCant();k++) {
+						Paralelo paralelo = lparalelos.getElementoI(k);
+						ListaPersonas lp = paralelo.getListaEstudiantes();
+						for(int a=0;a<lp.getCant();a++) {
+							if(lp.getElemento(a).equals(e)) {
+								paralelo.getListaEstudiantes().eliminar(e.getRut());
+								lpersonas.eliminar(e.getRut());
+								return true;
+							}
+						}
+					}
+				}
+			}else {
+				throw new NullPointerException("El estudiante "+p+" no existe");
+			}
+		}
 		return false;
 	}
 	

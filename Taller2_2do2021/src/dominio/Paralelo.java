@@ -8,11 +8,13 @@ public class Paralelo {
 	private Asignatura codigoAsignatura;
 	private Profesor rutProfesor;
 	private ListaPersonas listaEstudiantes;
+	private int cantEstudiantes;
 	
 	public Paralelo(int numeroParalelo) {
 		this.numeroParalelo = numeroParalelo;
 		codigoAsignatura = null;
 		rutProfesor = null;
+		cantEstudiantes =0;
 		listaEstudiantes = new ListaPersonas(100);
 	}
 
@@ -30,6 +32,18 @@ public class Paralelo {
 
 	public void setCodigoAsignatura(Asignatura codigoAsignatura) {
 		this.codigoAsignatura = codigoAsignatura;
+	}
+	
+	public int getCantEstudiantes() {
+		return cantEstudiantes;
+	}
+
+	public void setCantEstudiantes(int cantEstudiantes) {
+		this.cantEstudiantes = cantEstudiantes;
+	}
+
+	public void setListaEstudiantes(ListaPersonas listaEstudiantes) {
+		this.listaEstudiantes = listaEstudiantes;
 	}
 
 	public Profesor getRutProfesor() {
