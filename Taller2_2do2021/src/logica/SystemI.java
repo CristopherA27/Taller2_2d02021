@@ -18,7 +18,9 @@ public interface SystemI {
 	public void añadirCodeToAsignatura();
 	
 	//INICIO MENUS 
-	public String obtenerAsignaturasDisponibles(String rut);
+	public String obtenerAsignaturasObligatoriasDisponibles(String rut);
+	public String obtenerAsignaturasOpcionalesDisponibles(String rut);
+	
 	public String obtenerParalelosDisponibles(String codigoAsignatura);
 	
 	

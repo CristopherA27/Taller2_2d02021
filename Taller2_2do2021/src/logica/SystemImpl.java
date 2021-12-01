@@ -143,7 +143,97 @@ public class SystemImpl implements SystemI{
 			throw new NullPointerException("El paralelo "+paralelo+" no existe");
 		}
 	}
-
+	
+	public String obtenerAsignaturasOpcionalesDisponibles(String rut) {
+		String dato = "";
+		Persona p = lpersonas.buscar(rut);
+		if(p != null && p instanceof Estudiante) {
+			Estudiante estudiante =(Estudiante)p;
+			for(int i=0;i<lasignaturas.getCant();i++) {
+				Asignatura asig = lasignaturas.getElementoI(i);
+				if(asig instanceof AsignaturaOpcional) {
+					AsignaturaOpcional asigOp = (AsignaturaOpcional)asig;
+					boolean encontrado=false;
+					int k;
+					for(k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
+						Asignatura asigCur = estudiante.getAsignaturasCursadas().getElementoI(k);
+						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) &&asigCur.getNotaFinal() <3.95 ) {
+							dato += asigOp.getCodigoAsignatura()+" "+asigOp.getNombreAsignatura()+" "+asigOp.getCantCreditos()+" "+asigOp.getCantCreditosPrerrequisitos()+"\n";
+							encontrado = true;
+							break;
+						}
+						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) &&asigCur.getNotaFinal() >=3.95 ) {
+							break;
+						}
+					}
+					if(k==estudiante.getAsignaturasCursadas().getCant() && !encontrado) {
+						boolean reconocida = true;
+						for(int j=0;j<estudiante.getAsignaturasInscritas().getCant();j++) {
+							Asignatura asigEstudi = estudiante.getAsignaturasInscritas().getElementoI(j);
+							if(asigOp.getCodigoAsignatura().equals(asigEstudi.getCodigoAsignatura())) {
+								reconocida = false;
+								break;
+							}
+						}
+						if (reconocida) {
+							dato += asigOp.getCodigoAsignatura()+" "+asigOp.getNombreAsignatura()+" "+asigOp.getCantCreditos()+" "+asigOp.getCantCreditosPrerrequisitos()+"\n";
+						}
+					}	
+				}
+			}
+		}
+		return dato;
+	}
+	
+	//the rial
+	/*
+	public String obtenerAsignaturasOpcionalesDisponibles(String rut) {
+		String dato = "";
+		Persona p = lpersonas.buscar(rut);
+		if(p != null && p instanceof Estudiante) {
+			Estudiante estudiante =(Estudiante)p;
+			for(int i=0;i<lasignaturas.getCant();i++) {
+				Asignatura asig = lasignaturas.getElementoI(i);
+				if(asig instanceof AsignaturaOpcional) {
+					AsignaturaOpcional asigOp = (AsignaturaOpcional)asig;
+					boolean reconocida = true;
+					for(int j=0;j<estudiante.getAsignaturasInscritas().getCant();j++) {
+						Asignatura asigEstudi = estudiante.getAsignaturasInscritas().getElementoI(j);
+						if(asigOp.getCodigoAsignatura().equals(asigEstudi.getCodigoAsignatura())) {
+							reconocida = false;
+							break;
+						}
+					}
+					if (reconocida) {
+						dato += asigOp.getCodigoAsignatura()+" "+asigOp.getNombreAsignatura()+" "+asigOp.getCantCreditos()+" "+asigOp.getCantCreditosPrerrequisitos()+"\n";
+					}else {
+						
+					}
+					for(int k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
+						Asignatura asigCur = estudiante.getAsignaturasCursadas().getElementoI(k);
+						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) &&asigCur.getNotaFinal() <3.95 ) {
+							dato += asigOp.getCodigoAsignatura()+" "+asigOp.getNombreAsignatura()+" "+asigOp.getCantCreditos()+" "+asigOp.getCantCreditosPrerrequisitos()+"\n";
+							break;
+						}
+						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) &&asigCur.getNotaFinal() >=3.95 ) {
+							break;
+						}
+					}
+				}
+			}
+		}
+		return dato;
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	public String obtenerAsignaturasDisponibles(String rut) {
 		String dato = "";
 		Persona p = lpersonas.buscar(rut);
@@ -179,7 +269,6 @@ public class SystemImpl implements SystemI{
 							}
 						}
 					}
-				//aca me quede	
 				}else {
 					AsignaturaOpcional asigOpcional = (AsignaturaOpcional)asig;
 					for(int k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
@@ -191,7 +280,7 @@ public class SystemImpl implements SystemI{
 			}
 		}
 		return dato;
-	}
+	}*/
 	
 	
 	//esta dudoso
