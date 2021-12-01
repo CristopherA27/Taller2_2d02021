@@ -157,7 +157,7 @@ public class SystemImpl implements SystemI{
 					int k;
 					for(k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
 						Asignatura asigCur = estudiante.getAsignaturasCursadas().getElementoI(k);
-						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) &&asigCur.getNotaFinal() <3.95 ) {
+						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) && asigCur.getNotaFinal() <3.95 ) {
 							dato += asigOp.getCodigoAsignatura()+" "+asigOp.getNombreAsignatura()+" "+asigOp.getCantCreditos()+" "+asigOp.getCantCreditosPrerrequisitos()+"\n";
 							encontrado = true;
 							break;
@@ -166,7 +166,8 @@ public class SystemImpl implements SystemI{
 							break;
 						}
 					}
-					if(k==estudiante.getAsignaturasCursadas().getCant() && !encontrado) {
+					
+					if(k==estudiante.getAsignaturasCursadas().getCant() || !encontrado) {
 						boolean reconocida = true;
 						for(int j=0;j<estudiante.getAsignaturasInscritas().getCant();j++) {
 							Asignatura asigEstudi = estudiante.getAsignaturasInscritas().getElementoI(j);
@@ -183,6 +184,10 @@ public class SystemImpl implements SystemI{
 			}
 		}
 		return dato;
+	}
+	
+	public String obtenerAsignaturasObligatoriasDisponibles(String rut) {
+		return null;
 	}
 	
 	//the rial
