@@ -166,8 +166,7 @@ public class SystemImpl implements SystemI{
 							break;
 						}
 					}
-					
-					if(k==estudiante.getAsignaturasCursadas().getCant() || !encontrado) {
+					if(k==estudiante.getAsignaturasCursadas().getCant()) {
 						boolean reconocida = true;
 						for(int j=0;j<estudiante.getAsignaturasInscritas().getCant();j++) {
 							Asignatura asigEstudi = estudiante.getAsignaturasInscritas().getElementoI(j);

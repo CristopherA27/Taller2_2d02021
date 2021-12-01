@@ -183,7 +183,12 @@ public class App {
 		leerEstudiantes(system);
 		leerProfesores(system);
 		String rut = "123456k";
-		System.out.println(system.obtenerAsignaturasDisponibles(rut));
+		/*if(!false) {
+			System.out.println("a");
+		}
+		System.out.println(!false);*/
+		
+		System.out.println(system.obtenerAsignaturasOpcionalesDisponibles(rut));
 	}
 	
 	

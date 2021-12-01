@@ -2,3 +2,4 @@
 1285,termodinámica,8,obligatoria,2,3,1284,1085,9450
 1085,mate,4,opcional,2
 1286,belga,4,opcional,14
+1287,fisica,3,opcional,5
