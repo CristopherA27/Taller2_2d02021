@@ -7,13 +7,13 @@ public class Paralelo {
 	private int numeroParalelo;
 	private Asignatura codigoAsignatura;
 	private Profesor rutProfesor;
-	private ListaPersonas listaPersonas;
+	private ListaPersonas listaEstudiantes;
 	
 	public Paralelo(int numeroParalelo) {
 		this.numeroParalelo = numeroParalelo;
 		codigoAsignatura = null;
 		rutProfesor = null;
-		listaPersonas = new ListaPersonas(100);
+		listaEstudiantes = new ListaPersonas(100);
 	}
 
 	public int getNumeroParalelo() {
@@ -40,7 +40,7 @@ public class Paralelo {
 		this.rutProfesor = rutProfesor;
 	}
 
-	public ListaPersonas getListaPersonas() {
-		return listaPersonas;
+	public ListaPersonas getListaEstudiantes() {
+		return listaEstudiantes;
 	}
 }

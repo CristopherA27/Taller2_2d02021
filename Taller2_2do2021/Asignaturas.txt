@@ -3,3 +3,4 @@
 1085,mate,4,opcional,2
 1286,belga,4,opcional,14
 1287,fisica,3,opcional,5
+1200,calculo,5,obligatoria,5,1,1287

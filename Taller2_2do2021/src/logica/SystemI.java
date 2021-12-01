@@ -21,6 +21,8 @@ public interface SystemI {
 	public String obtenerAsignaturasObligatoriasDisponibles(String rut);
 	public String obtenerAsignaturasOpcionalesDisponibles(String rut);
 	
+	
+	
 	public String obtenerParalelosDisponibles(String codigoAsignatura);
 	
 	

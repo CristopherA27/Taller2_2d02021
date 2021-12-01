@@ -9,7 +9,7 @@ public class Estudiante extends Persona{
 
 	public Estudiante(String rut, String correo, String contraseña,int nivelAlumno) {
 		super(rut, correo, contraseña);
-		nivelAlumno =0;
+		this.nivelAlumno = nivelAlumno;
 		asignaturasCursadas = new ListaAsignaturas(100);
 		asignaturasInscritas = new ListaAsignaturas(100);
 		creditos =0;
