@@ -157,7 +157,7 @@ public class SystemImpl implements SystemI{
 					for(k=0;k<estudiante.getAsignaturasCursadas().getCant();k++) {
 						Asignatura asigCur = estudiante.getAsignaturasCursadas().getElementoI(k);
 						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) && asigCur.getNotaFinal() <3.95 ) {
-							dato += asigOp.getCodigoAsignatura()+" "+asigOp.getNombreAsignatura()+" "+asigOp.getCantCreditos()+" "+asigOp.getCantCreditosPrerrequisitos()+"\n";
+							dato += asigOp.getCodigoAsignatura()+","+asigOp.getNombreAsignatura()+","+asigOp.getCantCreditos()+","+asigOp.getCantCreditosPrerrequisitos()+"\n";
 							break;
 						}
 						if(asigOp.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) &&asigCur.getNotaFinal() >=3.95 ) {
@@ -174,7 +174,7 @@ public class SystemImpl implements SystemI{
 							}
 						}
 						if (reconocida) {
-							dato += asigOp.getCodigoAsignatura()+" "+asigOp.getNombreAsignatura()+" "+asigOp.getCantCreditos()+" "+asigOp.getCantCreditosPrerrequisitos()+"\n";
+							dato += asigOp.getCodigoAsignatura()+","+asigOp.getNombreAsignatura()+","+asigOp.getCantCreditos()+","+asigOp.getCantCreditosPrerrequisitos()+"\n";
 						}
 					}	
 				}
@@ -202,19 +202,18 @@ public class SystemImpl implements SystemI{
 						}
 					}
 					if(reconocida && asigOb.getNivelMalla()<= estudiante.getNivelAlumno() ) {
-						dato+= asigOb.getCodigoAsignatura()+", "+asigOb.getNombreAsignatura()+" ,"+asigOb.getCantCreditos()+" ,"+asigOb.getNivelMalla()+", "+asigOb.getCantAsignaturasPrerrequisito()+", ";
+						dato+= asigOb.getCodigoAsignatura()+","+asigOb.getNombreAsignatura()+","+asigOb.getCantCreditos()+","+asigOb.getNivelMalla()+","+asigOb.getCantAsignaturasPrerrequisito()+", ";
 						for(int k=0;k<asigOb.getListaAsignaturas().getCant();k++) {
-							dato+= asigOb.getListaAsignaturas().getElementoI(k).getCodigoAsignatura()+",";
+							dato+= asigOb.getListaAsignaturas().getElementoI(k).getCodigoAsignatura()+"";
 						}
 						//System.out.println(estudiante.getNivelAlumno());
 					}
 					if(j==estudiante.getAsignaturasInscritas().getCant()) {
-						boolean encontrado = true;
 						for(int a=0;a<estudiante.getAsignaturasCursadas().getCant();a++) {
 							Asignatura asigCur = estudiante.getAsignaturasCursadas().getElementoI(a);
 							if(asigOb.getNivelMalla()<= estudiante.getNivelAlumno()) {
 								if(asigOb.getCodigoAsignatura().equals(asigCur.getCodigoAsignatura()) && asigCur.getNotaFinal() <3.95) {
-									dato+=asigOb.getCodigoAsignatura()+" "+asigOb.getNombreAsignatura()+" "+asigOb.getCantCreditos()+" "+asigOb.getNivelMalla()+" "+asigOb.getCantAsignaturasPrerrequisito()+", ";
+									dato+=asigOb.getCodigoAsignatura()+" "+asigOb.getNombreAsignatura()+","+asigOb.getCantCreditos()+","+asigOb.getNivelMalla()+","+asigOb.getCantAsignaturasPrerrequisito()+",";
 									for(int k=0;k<asigOb.getListaAsignaturas().getCant();k++) {
 										dato+= asigOb.getListaAsignaturas().getElementoI(k).getCodigoAsignatura()+",";
 									}
@@ -231,7 +230,6 @@ public class SystemImpl implements SystemI{
 		}
 		return dato;
 	}
-	
 	
 	//me imagino que esta bien
 	public String obtenerParalelosDisponibles(String codigoAsignatura) {

@@ -184,7 +184,7 @@ public class App {
 		leerProfesores(system);
 		String rut = "123456k";
 		
-		//System.out.println(system.obtenerAsignaturasOpcionalesDisponibles(rut));
+		System.out.println(system.obtenerAsignaturasOpcionalesDisponibles(rut));
 		System.out.println(system.obtenerAsignaturasObligatoriasDisponibles(rut));
 	}
 	
