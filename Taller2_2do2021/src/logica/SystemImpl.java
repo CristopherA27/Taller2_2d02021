@@ -231,7 +231,6 @@ public class SystemImpl implements SystemI{
 		return dato;
 	}
 	
-	//me imagino que esta bien
 	public String obtenerParalelosDisponibles(String codigoAsignatura) {
 		String dato = "";
 		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
@@ -298,7 +297,7 @@ public class SystemImpl implements SystemI{
 		return false;
 	}
 	
-	//creo que esta bien
+
 	public String obtenerAsignaturasInscritas(String rutEstudiante) {
 		String dato = "";
 		Persona p = lpersonas.buscar(rutEstudiante);
@@ -318,9 +317,16 @@ public class SystemImpl implements SystemI{
 		Persona persona = lpersonas.buscar(rutEstudiante);
 		if(persona != null && persona instanceof Estudiante) {
 			Estudiante estudiante = (Estudiante)persona;
-			estudiante.getAsignaturasInscritas().eliminar(codigoAsignatura);
-		}
-		return false;
+			Asignatura asig = estudiante.getAsignaturasInscritas().buscar(codigoAsignatura);
+			if(asig != null) {
+				estudiante.getAsignaturasInscritas().eliminar(codigoAsignatura);
+				return true;
+			}else {
+				throw new NullPointerException("La asignatura "+asig+" no existe en la lista de asignaturas inscritas del estudiante");
+			}
+		}else {
+			throw new NullPointerException("El estudiante "+persona+" no existe");
+		}          
 	}
 
 	//mas seguro que los otros
