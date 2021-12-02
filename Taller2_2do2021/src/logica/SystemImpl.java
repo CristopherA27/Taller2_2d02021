@@ -134,6 +134,7 @@ public class SystemImpl implements SystemI{
 						paralelo.setCodigoAsignatura(asig);
 						paralelo.setRutProfesor(profe);
 						profe.getListaParalelos().ingresar(paralelo);
+						profe.getListaAsignaturas().ingresar(asig);
 						return true;
 					}else {
 						AsignaturaOpcional asigOp = (AsignaturaOpcional)asig;
@@ -141,6 +142,7 @@ public class SystemImpl implements SystemI{
 						paralelo.setCodigoAsignatura(asig);
 						paralelo.setRutProfesor(profe);
 						profe.getListaParalelos().ingresar(paralelo);
+						profe.getListaAsignaturas().ingresar(asig);
 						return true;
 					}
 				}else {
@@ -321,22 +323,34 @@ public class SystemImpl implements SystemI{
 		}
 		return dato;
 	}
-	//verificar
+	//verificar con tobal
 	@Override
-	public boolean eliminarAsignatura(String rutEstudiante, String codigoAsignatura) {
+	public boolean eliminarAsignaturaInscrita(String rutEstudiante, String codigoAsignatura) {
 		Persona persona = lpersonas.buscar(rutEstudiante);
 		if(persona != null && persona instanceof Estudiante) {
 			Estudiante estudiante = (Estudiante)persona;
 			Asignatura asig = estudiante.getAsignaturasInscritas().buscar(codigoAsignatura);
 			if(asig != null) {
-				estudiante.getAsignaturasInscritas().eliminar(codigoAsignatura);
-				return true;
+				for(int i=0;i<lparalelos.getCant();i++) {
+					Paralelo paralelo = lparalelos.getElementoI(i);
+					ListaPersonas le = paralelo.getListaEstudiantes();
+					for(int j=0;j<le.getCant();j++) {
+						if(le.getElemento(j).getRut().equals(rutEstudiante)) {
+							le.eliminar(rutEstudiante);
+							estudiante.getAsignaturasInscritas().eliminar(codigoAsignatura);
+							paralelo.setCantEstudiantes(paralelo.getCantEstudiantes()-1);
+							return true;
+						}
+					}
+					
+				}
 			}else {
 				throw new NullPointerException("La asignatura "+asig+" no existe en la lista de asignaturas inscritas del estudiante");
 			}
 		}else {
 			throw new NullPointerException("El estudiante "+persona+" no existe");
-		}          
+		} 
+		return false;
 	}
 
 	public String obtenerParalelosDictados(String rutProfesor) {

@@ -29,7 +29,7 @@ public interface SystemI {
 	public boolean inscribirAsignatura(String rutEstudiante,String codigoAsignatura,int numeroParalelo);
 	
 	public String obtenerAsignaturasInscritas(String rutEstudiante);
-	public boolean eliminarAsignatura(String rutEstudiante,String codigoAsignatura);
+	public boolean eliminarAsignaturaInscrita(String rutEstudiante,String codigoAsignatura);
 	
 	
 	public String obtenerParalelosDictados(String rutProfesor);

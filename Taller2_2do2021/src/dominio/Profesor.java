@@ -9,7 +9,8 @@ public class Profesor extends Persona{
 	
 	public Profesor(String rut, String correo, String contraseña,int salario) {
 		super(rut, correo, contraseña);
-		salario = 0;
+		listaAsignaturas = new ListaAsignaturas(100);
+		listaParalelos = new ListaParalelos(100);
 		this.salario = salario;
 	}
 

@@ -150,15 +150,16 @@ public class App {
 	
 	public static void leerParalelos(SystemI system) throws IOException {
 		//System.out.println("Leyendo paralelos");
-		ArchivoEntrada arch = new ArchivoEntrada("Paralelos.txt");
-		while(!arch.isEndFile()) {
-			Registro reg = arch.getRegistro();
-			int numeroParalelo = reg.getInt();
+		Scanner s = new Scanner(new File("Paralelos.txt"));
+		while(s.hasNextLine()) {
+			String linea = s.nextLine();
+			String [] partes = linea.split(",");
+			int numeroParalelo = Integer.parseInt(partes[0]);
 			try {
 				boolean ingresoParalelo = system.ingresarParalelo(numeroParalelo);
 				if(ingresoParalelo) {
-					String codigoAsignatura = reg.getString();
-					String rutProfesor = reg.getString();
+					String codigoAsignatura = partes[1];
+					String rutProfesor = partes[2];
 					try {
 						boolean ingresoAsocia = system.ingresarAsociarParaleloProfesorAsigntura(numeroParalelo, codigoAsignatura, rutProfesor);
 						if(!ingresoAsocia) {
@@ -171,6 +172,8 @@ public class App {
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+			System.out.println(linea);
+			
 		}
 		arch.close();
 	}
@@ -182,10 +185,8 @@ public class App {
 		leerParalelos(system);
 		leerEstudiantes(system);
 		leerProfesores(system);
-		String rut = "123456k";
-		
-		System.out.println(system.obtenerAsignaturasOpcionalesDisponibles(rut));
-		System.out.println(system.obtenerAsignaturasObligatoriasDisponibles(rut));
+		String rut = "123456789";
+		system.obtenerAsignaturasProfesor(rut);
 	}
 	
 	
