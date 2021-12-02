@@ -5,15 +5,15 @@ import logica.ListaPersonas;
 
 public class Paralelo {
 	private int numeroParalelo;
-	private Asignatura codigoAsignatura;
-	private Profesor rutProfesor;
+	private Asignatura asignatura;
+	private Profesor profesor;
 	private ListaPersonas listaEstudiantes;
 	private int cantEstudiantes;
 	
 	public Paralelo(int numeroParalelo) {
 		this.numeroParalelo = numeroParalelo;
-		codigoAsignatura = null;
-		rutProfesor = null;
+		asignatura = null;
+		profesor = null;
 		cantEstudiantes =0;
 		listaEstudiantes = new ListaPersonas(100);
 	}
@@ -24,15 +24,24 @@ public class Paralelo {
 	public void setNumeroParalelo(int numeroParalelo) {
 		this.numeroParalelo = numeroParalelo;
 	}
-
-	public Asignatura getCodigoAsignatura() {
-		return codigoAsignatura;
-	}
-
-	public void setCodigoAsignatura(Asignatura codigoAsignatura) {
-		this.codigoAsignatura = codigoAsignatura;
-	}
 	
+
+	public Asignatura getAsignatura() {
+		return asignatura;
+	}
+
+	public void setAsignatura(Asignatura asignatura) {
+		this.asignatura = asignatura;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+
 	public int getCantEstudiantes() {
 		return cantEstudiantes;
 	}
@@ -45,13 +54,6 @@ public class Paralelo {
 		this.listaEstudiantes = listaEstudiantes;
 	}
 
-	public Profesor getRutProfesor() {
-		return rutProfesor;
-	}
-
-	public void setRutProfesor(Profesor rutProfesor) {
-		this.rutProfesor = rutProfesor;
-	}
 
 	public ListaPersonas getListaEstudiantes() {
 		return listaEstudiantes;

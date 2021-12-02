@@ -134,15 +134,15 @@ public class SystemImpl implements SystemI{
 					if(asig instanceof AsignaturaObligatoria) {
 						//System.out.println("a");
 						AsignaturaObligatoria asigOb = (AsignaturaObligatoria)asig;
-						paralelo.setCodigoAsignatura(asigOb);
-						paralelo.setRutProfesor(profe);
+						paralelo.setAsignatura(asigOb);
+						paralelo.setProfesor(profe);
 						profe.getLparalelos().ingresar(paralelo);
 						profe.getLasignaturas().ingresar(asigOb);
 						return true;
 					}else {
 						AsignaturaOpcional asigOp = (AsignaturaOpcional)asig;
-						paralelo.setCodigoAsignatura(asigOp);
-						paralelo.setRutProfesor(profe);
+						paralelo.setAsignatura(asigOp);
+						paralelo.setProfesor(profe);
 						profe.getLparalelos().ingresar(paralelo);
 						profe.getLasignaturas().ingresar(asigOp);
 						return true;
@@ -161,7 +161,7 @@ public class SystemImpl implements SystemI{
 	public void a() {
 		for(int i=0;i<lparalelos.getCant();i++) {
 			Paralelo p = lparalelos.getElementoI(i);
-			System.out.println(p.getCodigoAsignatura()+","+p.getRutProfesor());
+			System.out.println(p.getAsignatura()+","+p.getProfesor());
 		}
 	}
 	
@@ -260,8 +260,8 @@ public class SystemImpl implements SystemI{
 		if(asig != null) {
 			for(int i=0;i<lparalelos.getCant();i++) {
 				Paralelo paralelo = lparalelos.getElementoI(i);
-				if(paralelo.getCodigoAsignatura().equals(codigoAsignatura) && paralelo.getCantEstudiantes()<100 ) {
-					dato += paralelo.getNumeroParalelo()+" "+paralelo.getRutProfesor()+"\n";
+				if(paralelo.getAsignatura().getCodigoAsignatura().equals(codigoAsignatura) && paralelo.getCantEstudiantes()<100 ) {
+					dato += paralelo.getNumeroParalelo()+" "+paralelo.getProfesor().getRut()+"\n";
 					paralelo.setCantEstudiantes(paralelo.getCantEstudiantes()+1);
 				}
 			}
@@ -372,7 +372,7 @@ public class SystemImpl implements SystemI{
 			ListaParalelos lp = profe.getLparalelos();
 			for(int i=0;i<lp.getCant();i++) {
 				Paralelo paralelo = lp.getElementoI(i);
-				dato += paralelo.getNumeroParalelo()+" "+paralelo.getCodigoAsignatura()+"\n";
+				dato += paralelo.getNumeroParalelo()+" "+paralelo.getAsignatura().getCodigoAsignatura()+"\n";
 			}
 		}
 		return dato;
