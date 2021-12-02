@@ -27,12 +27,29 @@ public class ListaParalelos {
 	}
 	
 	public Paralelo buscar(int numeroParalelo) {
+		int i;
+	    for(i = 0; i < cant; i++){
+
+	        if(listaParalelos[i].getNumeroParalelo() == numeroParalelo){
+	            break;
+	        }
+	    }
+	    if(i == cant){
+
+	        return null;
+
+	    }
+	    else{
+	    	//System.out.println(listaParalelos[i].getNumeroParalelo());
+	        return listaParalelos[i];
+	    }
+		/*
 		for(int i=0;i<cant;i++) {
 			if(listaParalelos[i].getNumeroParalelo() == numeroParalelo) {
 				return listaParalelos[i];
 			}
-		}
-		return null;
+		}*/
+
 	}
 	
 	public boolean eliminar(int numeroParalelo) {

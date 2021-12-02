@@ -5,15 +5,15 @@ import logica.ListaPersonas;
 
 public class Paralelo {
 	private int numeroParalelo;
-	private Asignatura asignatura;
-	private Profesor profesor;
+	private String asignatura;
+	private String rutProfesor;
 	private ListaPersonas listaEstudiantes;
 	private int cantEstudiantes;
 	
-	public Paralelo(int numeroParalelo) {
+	public Paralelo(int numeroParalelo,String asignatura,String rutProfesor) {
 		this.numeroParalelo = numeroParalelo;
-		asignatura = null;
-		profesor = null;
+		this.asignatura = asignatura;
+		this.rutProfesor = rutProfesor;
 		cantEstudiantes =0;
 		listaEstudiantes = new ListaPersonas(100);
 	}
@@ -25,21 +25,20 @@ public class Paralelo {
 		this.numeroParalelo = numeroParalelo;
 	}
 	
-
-	public Asignatura getAsignatura() {
+	public String getAsignatura() {
 		return asignatura;
 	}
 
-	public void setAsignatura(Asignatura asignatura) {
+	public void setAsignatura(String asignatura) {
 		this.asignatura = asignatura;
 	}
 
-	public Profesor getProfesor() {
-		return profesor;
+	public String getRutProfesor() {
+		return rutProfesor;
 	}
 
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
+	public void setRutProfesor(String rutProfesor) {
+		this.rutProfesor = rutProfesor;
 	}
 
 	public int getCantEstudiantes() {

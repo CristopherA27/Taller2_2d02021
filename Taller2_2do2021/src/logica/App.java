@@ -149,28 +149,20 @@ public class App {
 	}
 	
 	public static void leerParalelos(SystemI system) throws IOException {
-		//System.out.println("Leyendo paralelos");
+		System.out.println("Leyendo paralelos");
 		Scanner s = new Scanner(new File("Paralelos.txt"));
 		while(s.hasNextLine()) {
 			String linea = s.nextLine();
 			String [] partes = linea.split(",");
 			int numeroParalelo = Integer.parseInt(partes[0]);
+			String codigoAsignatura = partes[1];
+			String rutProfesor = partes[2];
 			try {
-				boolean ingresoParalelo = system.ingresarParalelo(numeroParalelo);
+				boolean ingresoParalelo = system.ingresarParalelo(numeroParalelo, codigoAsignatura, rutProfesor);
 				if(ingresoParalelo) {
-					System.out.println("a");
-					String codigoAsignatura = partes[1];
-					String rutProfesor = partes[2];
-					try {
-						boolean ingresoAsocia = system.ingresarAsociarParaleloProfesorAsignatura(numeroParalelo, codigoAsignatura, rutProfesor);
-						if(ingresoAsocia) {
-							System.out.println("a");
-						}else {
-							System.out.println("No existe espacio para ingresar mas paralelos");
-						}
-					}catch(Exception ex) {
-						System.out.println("\t"+ex.getMessage());
-					}
+					//System.out.println("a");
+				}else {
+					System.out.println("b");
 				}
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -186,11 +178,11 @@ public class App {
 		SystemI system = new SystemImpl();
 		leerAsignaturas(system);
 		leerProfesores(system);
-		leerParalelos(system);
 		leerEstudiantes(system);
+		leerParalelos(system);
 		String rut = "123456789";
-		//system.obtenerAsignaturasProfesor(rut);
-		system.a();
+		//system.a();
+		//system.b();
 	}
 	
 	

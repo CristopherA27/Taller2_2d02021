@@ -9,6 +9,7 @@ public class SystemImpl implements SystemI{
 	private ListaPersonas lpersonas;
 	private ListaAsignaturas lasignaturas;
 	private ListaParalelos lparalelos;
+
 	
 	public SystemImpl() {
 		lpersonas = new ListaPersonas(100);
@@ -74,10 +75,23 @@ public class SystemImpl implements SystemI{
 	}
 
 	@Override
-	public boolean ingresarParalelo(int numeroParalelo) {
-		Paralelo paralelo = new Paralelo(numeroParalelo);
+	public boolean ingresarParalelo(int numeroParalelo,String codigoAsignatura,String rutProfesor) {
+		Paralelo paralelo = new Paralelo(numeroParalelo, codigoAsignatura, rutProfesor);
 		boolean ingresado = lparalelos.ingresar(paralelo);
-		return false;
+		for(int i=0;i<lpersonas.getCant();i++) {
+			Persona p = lpersonas.getElemento(i);
+			if(p instanceof Profesor) {
+				if( p.getRut().equals(rutProfesor)) {
+					ListaParalelos lp = ((Profesor) p).getLparalelos();
+					lp.ingresar(paralelo);	
+					return true;
+				}
+			}else {
+				throw new NullPointerException("");
+			}
+		}
+		return ingresado;
+		
 	}
 
 	@Override
@@ -121,30 +135,20 @@ public class SystemImpl implements SystemI{
 		}
 	}
 	
+	
 	public boolean ingresarAsociarParaleloProfesorAsignatura(int numeroParalelo, String codigoAsignatura,String rutProfesor) {
 		Paralelo paralelo = lparalelos.buscar(numeroParalelo);
+		System.out.println(paralelo.getRutProfesor());
 		if(paralelo != null) {
-			//System.out.println(paralelo);
 			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
 			if(asig != null) {
+				System.out.println(asig.getCodigoAsignatura());
 				Persona persona = lpersonas.buscar(rutProfesor);
 				if(persona != null && persona instanceof Profesor) {
 					Profesor profe = (Profesor)persona;
-					//System.out.println(asig);
-					if(asig instanceof AsignaturaObligatoria) {
-						//System.out.println("a");
-						AsignaturaObligatoria asigOb = (AsignaturaObligatoria)asig;
-						paralelo.setAsignatura(asigOb);
-						paralelo.setProfesor(profe);
-						profe.getLparalelos().ingresar(paralelo);
-						profe.getLasignaturas().ingresar(asigOb);
-						return true;
-					}else {
-						AsignaturaOpcional asigOp = (AsignaturaOpcional)asig;
-						paralelo.setAsignatura(asigOp);
-						paralelo.setProfesor(profe);
-						profe.getLparalelos().ingresar(paralelo);
-						profe.getLasignaturas().ingresar(asigOp);
+					paralelo.setRutProfesor(profe.getRut());
+					paralelo.setAsignatura(codigoAsignatura);
+					if(profe.getLparalelos().ingresar(paralelo)) {
 						return true;
 					}
 				}else {
@@ -156,12 +160,75 @@ public class SystemImpl implements SystemI{
 		}else {
 			throw new NullPointerException("El paralelo "+paralelo+" no existe");
 		}
+		return false;
 	}
 	
+	
+	
+	/*
+	public boolean ingresarAsociarParaleloProfesorAsignatura(int numeroParalelo, String codigoAsignatura,String rutProfesor) {
+		Paralelo paralelo = lparalelos.buscar(numeroParalelo);
+		if(paralelo != null) {
+			Asignatura asig = lasignaturas.buscar(codigoAsignatura);
+			if(asig != null) {
+				Persona p = lpersonas.buscar(rutProfesor);
+				if(p != null && p instanceof Profesor) {
+					Profesor profe = (Profesor)p;
+					if(asig instanceof AsignaturaObligatoria) {
+						AsignaturaObligatoria asigOb = (AsignaturaObligatoria)asig;
+						paralelo.setAsignatura(asigOb);
+						paralelo.setProfesor(profe);
+						profe.getLparalelos().ingresar(paralelo);
+						profe.getLparalelos().buscar(numeroParalelo).setAsignatura(asigOb);
+						
+					}else {
+						AsignaturaOpcional asigOp = (AsignaturaOpcional)asig;
+						paralelo.setAsignatura(asigOp);
+						paralelo.setProfesor(profe);
+						profe.getLparalelos().ingresar(paralelo);
+						profe.getLparalelos().buscar(numeroParalelo).setAsignatura(asigOp);
+					}
+				}
+			}
+		}
+		
+		return false;
+	}*/
+	
+	
+	
 	public void a() {
+		
+		for(int i=0;i<lpersonas.getCant();i++) {
+			Persona p = lpersonas.getElemento(i);
+			if(p instanceof Profesor) {
+				Profesor profe = (Profesor)p;
+				ListaParalelos lp = profe.getLparalelos();
+				//System.out.println(lp.getCant());
+				for(int k=0;k<lp.getCant();k++) {
+					System.out.println(lp.getElementoI(k).getNumeroParalelo()+","+lp.getElementoI(k).getAsignatura());
+				}
+			}
+		}
+		
+	}
+	
+	
+	public void b() {
+		System.out.println(lparalelos.getCant());
 		for(int i=0;i<lparalelos.getCant();i++) {
 			Paralelo p = lparalelos.getElementoI(i);
-			System.out.println(p.getAsignatura()+","+p.getProfesor());
+			System.out.println(p.getNumeroParalelo()+","+p.getRutProfesor()+","+p.getAsignatura());
+		}
+	}
+	
+	public void c() {
+		for(int i=0;i<lpersonas.getCant();i++) {
+			Persona p = lpersonas.getElemento(i);
+			if(p instanceof Profesor) {
+				Profesor profe = (Profesor)p;
+				System.out.println(profe.getRut()+","+profe.getCorreo()+","+profe.getSalario());
+			}
 		}
 	}
 	
@@ -253,7 +320,7 @@ public class SystemImpl implements SystemI{
 		}
 		return dato;
 	}
-	
+	/*
 	public String obtenerParalelosDisponibles(String codigoAsignatura) {
 		String dato = "";
 		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
@@ -267,7 +334,7 @@ public class SystemImpl implements SystemI{
 			}
 		}
 		return dato;
-	}
+	}*/
 
 	@Override
 	public boolean inscribirAsignatura(String rutEstudiante, String codigoAsignatura, int numeroParalelo) {
@@ -363,7 +430,8 @@ public class SystemImpl implements SystemI{
 		} 
 		return false;
 	}
-
+	
+	/*
 	public String obtenerParalelosDictados(String rutProfesor) {
 		String dato = "";
 		Persona p = lpersonas.buscar(rutProfesor);
@@ -376,7 +444,7 @@ public class SystemImpl implements SystemI{
 			}
 		}
 		return dato;
-	}
+	}*/
 
 	@Override
 	public String obtenerAlumnosDeParalelo(int numeroParalelo, String rutProfesor) {
@@ -403,7 +471,7 @@ public class SystemImpl implements SystemI{
 		}
 		return dato;
 	}
-	
+	/*
 	public String obtenerAsignaturasProfesor(String rutProfesor) {
 		String dato ="";
 		Persona p = lpersonas.buscar(rutProfesor);
@@ -421,7 +489,7 @@ public class SystemImpl implements SystemI{
 			throw new NullPointerException("La persona "+p+"no existe");
 		}
 		return dato;
-	}
+	}*/
 
 	@Override
 	public boolean ingresarNotaFinal(String codigoAsignatura, String rutEstudiante, double notaFinal) {
