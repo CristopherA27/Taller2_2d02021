@@ -3,14 +3,13 @@ import logica.*;
 
 public class Profesor extends Persona{
 	private int salario;
-	private ListaParalelos listaParalelos;
-	private ListaAsignaturas listaAsignaturas;
-	
+	private ListaParalelos lparalelos;
+	private ListaAsignaturas lasignaturas;
 	
 	public Profesor(String rut, String correo, String contraseña,int salario) {
 		super(rut, correo, contraseña);
-		listaAsignaturas = new ListaAsignaturas(100);
-		listaParalelos = new ListaParalelos(100);
+		lasignaturas = new ListaAsignaturas(100);
+		lparalelos = new ListaParalelos(100);
 		this.salario = salario;
 	}
 
@@ -22,13 +21,22 @@ public class Profesor extends Persona{
 		this.salario = salario;
 	}
 
-	public ListaParalelos getListaParalelos() {
-		return listaParalelos;
+	public ListaParalelos getLparalelos() {
+		return lparalelos;
 	}
 
-	public ListaAsignaturas getListaAsignaturas() {
-		return listaAsignaturas;
+	public void setLparalelos(ListaParalelos lparalelos) {
+		this.lparalelos = lparalelos;
 	}
+
+	public ListaAsignaturas getLasignaturas() {
+		return lasignaturas;
+	}
+
+	public void setLasignaturas(ListaAsignaturas lasignaturas) {
+		this.lasignaturas = lasignaturas;
+	}
+
 
 	
 

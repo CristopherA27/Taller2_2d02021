@@ -158,11 +158,14 @@ public class App {
 			try {
 				boolean ingresoParalelo = system.ingresarParalelo(numeroParalelo);
 				if(ingresoParalelo) {
+					System.out.println("a");
 					String codigoAsignatura = partes[1];
 					String rutProfesor = partes[2];
 					try {
-						boolean ingresoAsocia = system.ingresarAsociarParaleloProfesorAsigntura(numeroParalelo, codigoAsignatura, rutProfesor);
-						if(!ingresoAsocia) {
+						boolean ingresoAsocia = system.ingresarAsociarParaleloProfesorAsignatura(numeroParalelo, codigoAsignatura, rutProfesor);
+						if(ingresoAsocia) {
+							System.out.println("a");
+						}else {
 							System.out.println("No existe espacio para ingresar mas paralelos");
 						}
 					}catch(Exception ex) {
@@ -172,21 +175,22 @@ public class App {
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-			System.out.println(linea);
+			//System.out.println(linea);
 			
 		}
-		arch.close();
+		s.close();
 	}
 
 	
 	public static void main(String[] args) throws IOException {
 		SystemI system = new SystemImpl();
 		leerAsignaturas(system);
+		leerProfesores(system);
 		leerParalelos(system);
 		leerEstudiantes(system);
-		leerProfesores(system);
 		String rut = "123456789";
-		system.obtenerAsignaturasProfesor(rut);
+		//system.obtenerAsignaturasProfesor(rut);
+		system.a();
 	}
 	
 	

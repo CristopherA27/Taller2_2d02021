@@ -21,7 +21,6 @@ public class Paralelo {
 	public int getNumeroParalelo() {
 		return numeroParalelo;
 	}
-
 	public void setNumeroParalelo(int numeroParalelo) {
 		this.numeroParalelo = numeroParalelo;
 	}

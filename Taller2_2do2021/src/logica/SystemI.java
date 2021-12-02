@@ -11,7 +11,7 @@ public interface SystemI {
 	public boolean ingresarAsociarAsignaturaCursada(String rutEstudiante,String codigoAsignatura,double notaFinal);
 	public boolean ingresarAsociarAsignaturaInscrita(String rutEstudiante,String codigoAsignatura,int numeroParalelo);
 
-	public boolean ingresarAsociarParaleloProfesorAsigntura(int numeroParalelo,String codigoAsignatura,String rutProfesor);
+	public boolean ingresarAsociarParaleloProfesorAsignatura(int numeroParalelo,String codigoAsignatura,String rutProfesor);
 	
 	//Asociar codigos de asignatura a ASIGNATURAOBLIGATORAIA
 	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura,String codigoBuscado);
@@ -41,8 +41,6 @@ public interface SystemI {
 	public boolean verificarAsignaturaInscritaACursada(String rutEstudiante,String codigoAsignatura);
 	
 	public boolean eliminarEstudiante();
-	
-	
-	
+	public void a();
 
 }
