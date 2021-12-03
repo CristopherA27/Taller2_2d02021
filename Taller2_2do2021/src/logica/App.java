@@ -149,7 +149,7 @@ public class App {
 	}
 	
 	public static void leerParalelos(SystemI system) throws IOException {
-		System.out.println("Leyendo paralelos");
+		//System.out.println("Leyendo paralelos");
 		Scanner s = new Scanner(new File("Paralelos.txt"));
 		while(s.hasNextLine()) {
 			String linea = s.nextLine();
@@ -159,16 +159,13 @@ public class App {
 			String rutProfesor = partes[2];
 			try {
 				boolean ingresoParalelo = system.ingresarParalelo(numeroParalelo, codigoAsignatura, rutProfesor);
-				if(ingresoParalelo) {
-					//System.out.println("a");
-				}else {
+				if(!ingresoParalelo) {
 					System.out.println("b");
 				}
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-			//System.out.println(linea);
-			
+			System.out.println(linea);
 		}
 		s.close();
 	}
@@ -178,9 +175,12 @@ public class App {
 		SystemI system = new SystemImpl();
 		leerAsignaturas(system);
 		leerProfesores(system);
+		leerParalelos(system);
 		leerEstudiantes(system);
 		leerParalelos(system);
-		String rut = "123456789";
+		String rutP = "123456789";
+		String rutE = "123456k";
+		//System.out.println(system.obtenerParalelosDictados(rutP));
 		//system.a();
 		//system.b();
 	}

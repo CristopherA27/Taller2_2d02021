@@ -48,13 +48,14 @@ public class Paralelo {
 	public void setCantEstudiantes(int cantEstudiantes) {
 		this.cantEstudiantes = cantEstudiantes;
 	}
-
+	
+	public ListaPersonas getListaEstudiantes() {
+		return listaEstudiantes;
+	}
+	
 	public void setListaEstudiantes(ListaPersonas listaEstudiantes) {
 		this.listaEstudiantes = listaEstudiantes;
 	}
 
-
-	public ListaPersonas getListaEstudiantes() {
-		return listaEstudiantes;
-	}
+	
 }

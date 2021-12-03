@@ -10,33 +10,28 @@ public interface SystemI {
 	public boolean ingresarParalelo(int numeroParalelo,String codigoAsignatura,String rutProfesor);
 	public boolean ingresarAsociarAsignaturaCursada(String rutEstudiante,String codigoAsignatura,double notaFinal);
 	public boolean ingresarAsociarAsignaturaInscrita(String rutEstudiante,String codigoAsignatura,int numeroParalelo);
-
-	public boolean ingresarAsociarParaleloProfesorAsignatura(int numeroParalelo,String codigoAsignatura,String rutProfesor);
 	
 	//Asociar codigos de asignatura a ASIGNATURAOBLIGATORAIA
 	public boolean asociarCodigosToAsignaturaObligatoria(String codigoAsignatura,String codigoBuscado);
 	public void añadirCodeToAsignatura();
 	
 	//INICIO MENUS 
+	//RF4 ESTUDIANTE
 	public String obtenerAsignaturasObligatoriasDisponibles(String rut);
 	public String obtenerAsignaturasOpcionalesDisponibles(String rut);
-	
-	
-	
-	//public String obtenerParalelosDisponibles(String codigoAsignatura);
-	
-	
+	public String obtenerParalelosDisponibles(String codigoAsignatura);
 	public boolean inscribirAsignatura(String rutEstudiante,String codigoAsignatura,int numeroParalelo);
 	
+	//RF4 PROFE
+	public String obtenerParalelosDictados(String rutProfesor);
+	public String obtenerAlumnosDeParalelo(int numeroParalelo,String rutProfesor);
+	
+	//RF5
 	public String obtenerAsignaturasInscritas(String rutEstudiante);
 	public boolean eliminarAsignaturaInscrita(String rutEstudiante,String codigoAsignatura);
 	
-	
-	//public String obtenerParalelosDictados(String rutProfesor);
-	public String obtenerAlumnosDeParalelo(int numeroParalelo,String rutProfesor);
-	
-	
-	//public String obtenerAsignaturasProfesor(String rutProfesor);
+	//RF6
+	//OBTENERPARALELOSDICTADOS
 	public boolean ingresarNotaFinal(String codigoAsignatura,String rutEstudiante,double notaFinal);
 	public boolean verificarAsignaturaInscritaACursada(String rutEstudiante,String codigoAsignatura);
 	

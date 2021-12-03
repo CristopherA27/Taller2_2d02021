@@ -3,12 +3,12 @@ package dominio;
 public class Asignatura {
 	private String codigoAsignatura;
 	private double notaFinal;
-	private Paralelo numeroParalelo;
+	private int numeroParalelo;
 	
 	public Asignatura(String codigoAsignatura) {
 		this.codigoAsignatura = codigoAsignatura;
 		notaFinal = 0;
-		numeroParalelo = null;
+		numeroParalelo = 0;
 	}
 	public double getNotaFinal() {
 		return notaFinal;
@@ -16,10 +16,11 @@ public class Asignatura {
 	public void setNotaFinal(double notaFinal) {
 		this.notaFinal = notaFinal;
 	}
-	public Paralelo getNumeroParalelo() {
+	
+	public int getNumeroParalelo() {
 		return numeroParalelo;
 	}
-	public void setNumeroParalelo(Paralelo numeroParalelo) {
+	public void setNumeroParalelo(int numeroParalelo) {
 		this.numeroParalelo = numeroParalelo;
 	}
 	public String getCodigoAsignatura() {
