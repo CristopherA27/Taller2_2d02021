@@ -427,6 +427,7 @@ public class SystemImpl implements SystemI{
 	public boolean eliminarEstudiante() {
 		for(int i=0;i<lpersonas.getCant();i++) {
 			Persona p = lpersonas.getElemento(i);
+			//System.out.println(p.getRut());
 			if(p instanceof Estudiante) {
 				Estudiante e = (Estudiante)p;
 				if(e.getNivelAlumno() == 10) {
@@ -434,7 +435,7 @@ public class SystemImpl implements SystemI{
 						Paralelo paralelo = lparalelos.getElementoI(k);
 						ListaPersonas lp = paralelo.getListaEstudiantes();
 						for(int a=0;a<lp.getCant();a++) {
-							if(lp.getElemento(a).getRut().equals(e.getRut())) {
+							if(lp.getElemento(a).equals(e)) {
 								paralelo.getListaEstudiantes().eliminar(e.getRut());
 								paralelo.setCantEstudiantes(paralelo.getCantEstudiantes()-1);
 								estudiantesEliminados.ingresar(e);
@@ -444,21 +445,18 @@ public class SystemImpl implements SystemI{
 						}
 					}
 				}
-			}else {
-				throw new NullPointerException("El estudiante "+p+" no existe");
 			}
 		}
 		return false;
 	}
 	
-	
-	public void a() {
-		//System.out.println(estudiantesEliminados.getCant());
+	public String estudiantesEliminados() {
+		String dato = "";
 		for(int i=0;i<estudiantesEliminados.getCant();i++) {
 			Persona p = estudiantesEliminados.getElemento(i);
-			System.out.println(p.getRut());
-			System.out.println(estudiantesEliminados.getCant());
+			dato +=p.getRut();
 		}
+		return dato;
 	}
 	
 }

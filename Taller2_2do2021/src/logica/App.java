@@ -165,8 +165,6 @@ public class App {
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-
-			//System.out.println(linea);
 		}
 		s.close();
 	}
@@ -181,14 +179,16 @@ public class App {
 		String rutP = "123456789";
 		String rutE = "123456k";
 		//System.out.println(system.obtenerParalelosDictados(rutP));
-		system.a();
+		//system.a();x
 		//system.b();
+		//system.c();
+		sobreescribir(system);
 	}
 	
 	public static void sobreescribir(SystemI system) throws IOException {
 		ArchivoSalida arch = new ArchivoSalida("Egresados.txt");
 		Registro registroSalida = new Registro(1);
-		registroSalida.agregarCampo(false);
+		registroSalida.agregarCampo(system.estudiantesEliminados());
 		arch.writeRegistro(registroSalida);
 		arch.close();
 	}

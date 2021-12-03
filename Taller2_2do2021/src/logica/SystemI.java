@@ -35,5 +35,6 @@ public interface SystemI {
 	public boolean ingresarNotaFinal(int numeroParalelo,String codigoAsignatura,String rutEstudiante,double notaFinal);
 	public boolean eliminarEstudiante();
 	
-	public void a();
+	//SOBREESCRIBIR
+	public String estudiantesEliminados();
 }
