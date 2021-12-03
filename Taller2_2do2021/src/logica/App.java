@@ -168,6 +168,79 @@ public class App {
 		}
 		s.close();
 	}
+	
+	public static boolean inicioSesion(SystemI system) {
+		System.out.println("BIENVENIDO AL GESTOR DE ACTIVIDADES UCR");
+		System.out.println();
+		System.out.print("Ingrese el correo: ");
+		String nombreCorreo = leer.nextLine();
+		if(nombreCorreo.equalsIgnoreCase("Admin")) {
+			System.out.print("Ingrese la contraseña: ");
+			String contraseña = leer.nextLine();
+			if(contraseña.equalsIgnoreCase("GHI_789")) {
+				menuAdmin(system);
+				return true;
+			}else {
+				System.out.println("Contraseña incorrecta....");
+				return false;
+			}
+		}
+		else{
+			boolean existeLaCuenta = system.existeCuenta(nombreCorreo);
+			if(existeLaCuenta) {
+				String [] tipoCuenta = nombreCorreo.split("@");
+				if(tipoCuenta[1]=="alumnos.ucn.cl") {
+					
+					System.out.print("Ingrese la contraseña: ");
+					String contraseña = leer.nextLine();
+					
+					boolean contraCorrect = system.contraseñaCorrecta(nombreCorreo, contraseña);
+					if(contraCorrect) {
+						System.out.print("Ingrese la fecha: ");
+						String fecha = leer.nextLine();
+						menuAlumnos(system, nombreCorreo,fecha);
+						return true;
+					}
+					else {
+						System.out.println("Contraseña incorrecta...");
+						return false;
+					}
+				}
+				if(tipoCuenta[1]=="ucn.cl") {
+					
+					System.out.print("Ingrese la contraseña: ");
+					String contraseña = leer.nextLine();
+					boolean contraCorrect = system.contraseñaCorrecta(nombreCorreo, contraseña);
+					
+					if(contraCorrect) {
+						System.out.print("Ingrese la fecha: ");
+						String fecha = leer.nextLine();
+						menuProfesores(system, nombreCorreo,fecha);
+						return true;
+					}
+					else {
+						System.out.println("Contraseña incorrecta...");
+						return false;
+					}
+			
+				}
+			
+			}
+			
+					
+		}
+	}
+
+	
+}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	public static void main(String[] args) throws IOException {
