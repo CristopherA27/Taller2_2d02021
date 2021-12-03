@@ -40,16 +40,9 @@ public class ListaParalelos {
 
 	    }
 	    else{
-	    	//System.out.println(listaParalelos[i].getNumeroParalelo());
 	        return listaParalelos[i];
 	    }
-		/*
-		for(int i=0;i<cant;i++) {
-			if(listaParalelos[i].getNumeroParalelo() == numeroParalelo) {
-				return listaParalelos[i];
-			}
-		}*/
-
+		
 	}
 	
 	public boolean eliminar(int numeroParalelo) {

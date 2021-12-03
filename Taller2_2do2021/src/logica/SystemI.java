@@ -2,7 +2,6 @@ package logica;
 
 public interface SystemI {
 	//ingresar
-	
 	public boolean ingresarEstudiante(String rut,String correo,String contraseña,int nivelAlumno);
 	public boolean ingresarProfesor(String rut,String correo,String contraseña,int salario);
 	public boolean ingresarAsignaturaObligatoria(String codigoAsignatura,String nombreAsignatura,int cantCreditos,int nivelMalla,int cantAsignaturasPrerrequisito);
@@ -19,6 +18,7 @@ public interface SystemI {
 	//RF4 ESTUDIANTE
 	public String obtenerAsignaturasObligatoriasDisponibles(String rut);
 	public String obtenerAsignaturasOpcionalesDisponibles(String rut);
+	
 	public String obtenerParalelosDisponibles(String codigoAsignatura);
 	public boolean inscribirAsignatura(String rutEstudiante,String codigoAsignatura,int numeroParalelo);
 	
@@ -33,11 +33,5 @@ public interface SystemI {
 	//RF6
 	//OBTENERPARALELOSDICTADOS
 	public boolean ingresarNotaFinal(int numeroParalelo,String codigoAsignatura,String rutEstudiante,double notaFinal);
-
-	
 	public boolean eliminarEstudiante();
-	
-	public void b();
-	public void a();
-	//public void c();
 }

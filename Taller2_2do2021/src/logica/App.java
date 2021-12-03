@@ -180,7 +180,7 @@ public class App {
 		leerEstudiantes(system);
 		String rutP = "123456789";
 		String rutE = "123456k";
-		System.out.println(system.obtenerParalelosDictados(rutP));
+		//System.out.println(system.obtenerParalelosDictados(rutP));
 		//system.a();
 		//system.b();
 	}
