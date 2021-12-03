@@ -53,9 +53,5 @@ public class Paralelo {
 		return listaEstudiantes;
 	}
 	
-	public void setListaEstudiantes(ListaPersonas listaEstudiantes) {
-		this.listaEstudiantes = listaEstudiantes;
-	}
-
 	
 }
