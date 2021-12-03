@@ -199,7 +199,6 @@ public class SystemImpl implements SystemI{
 						for(int k=0;k<asigOb.getListaAsignaturas().getCant();k++) {
 							dato+= asigOb.getListaAsignaturas().getElementoI(k).getCodigoAsignatura()+"";
 						}
-						//System.out.println(estudiante.getNivelAlumno());
 					}
 					if(j==estudiante.getAsignaturasInscritas().getCant()) {
 						for(int a=0;a<estudiante.getAsignaturasCursadas().getCant();a++) {
@@ -427,7 +426,6 @@ public class SystemImpl implements SystemI{
 	public boolean eliminarEstudiante() {
 		for(int i=0;i<lpersonas.getCant();i++) {
 			Persona p = lpersonas.getElemento(i);
-			//System.out.println(p.getRut());
 			if(p instanceof Estudiante) {
 				Estudiante e = (Estudiante)p;
 				if(e.getNivelAlumno() == 10) {
