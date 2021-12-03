@@ -430,7 +430,6 @@ public class SystemImpl implements SystemI{
 			if(p instanceof Estudiante) {
 				Estudiante e = (Estudiante)p;
 				if(e.getNivelAlumno() == 10) {
-					//lpersonas.eliminar(e.getRut());
 					for(int k=0;k<lparalelos.getCant();k++) {
 						Paralelo paralelo = lparalelos.getElementoI(k);
 						ListaPersonas lp = paralelo.getListaEstudiantes();
@@ -454,7 +453,7 @@ public class SystemImpl implements SystemI{
 	
 	
 	public void a() {
-		System.out.println(estudiantesEliminados.getCant());
+		//System.out.println(estudiantesEliminados.getCant());
 		for(int i=0;i<estudiantesEliminados.getCant();i++) {
 			Persona p = estudiantesEliminados.getElemento(i);
 			System.out.println(p.getRut());
