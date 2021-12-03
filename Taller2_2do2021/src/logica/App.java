@@ -160,12 +160,13 @@ public class App {
 			try {
 				boolean ingresoParalelo = system.ingresarParalelo(numeroParalelo, codigoAsignatura, rutProfesor);
 				if(!ingresoParalelo) {
-					System.out.println("b");
+					System.out.println("c");
 				}
 			}catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-			System.out.println(linea);
+
+			//System.out.println(linea);
 		}
 		s.close();
 	}
@@ -177,10 +178,9 @@ public class App {
 		leerProfesores(system);
 		leerParalelos(system);
 		leerEstudiantes(system);
-		leerParalelos(system);
 		String rutP = "123456789";
 		String rutE = "123456k";
-		//System.out.println(system.obtenerParalelosDictados(rutP));
+		System.out.println(system.obtenerParalelosDictados(rutP));
 		//system.a();
 		//system.b();
 	}

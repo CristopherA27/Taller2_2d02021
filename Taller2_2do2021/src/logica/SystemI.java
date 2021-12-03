@@ -32,7 +32,7 @@ public interface SystemI {
 	
 	//RF6
 	//OBTENERPARALELOSDICTADOS
-	public boolean ingresarNotaFinal(String codigoAsignatura,String rutEstudiante,double notaFinal);
+	public boolean ingresarNotaFinal(int numeroParalelo,String codigoAsignatura,String rutEstudiante,double notaFinal);
 	public boolean verificarAsignaturaInscritaACursada(String rutEstudiante,String codigoAsignatura);
 	
 	public boolean eliminarEstudiante();

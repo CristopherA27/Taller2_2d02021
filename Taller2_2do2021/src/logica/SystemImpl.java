@@ -429,7 +429,7 @@ public class SystemImpl implements SystemI{
 	}
 	
 	
-	public boolean ingresarNotaFinal(String codigoAsignatura, String rutEstudiante, double notaFinal) {
+	public boolean ingresarNotaFinal(int numeroParalelo,String codigoAsignatura, String rutEstudiante, double notaFinal) {
 		Asignatura asig = lasignaturas.buscar(codigoAsignatura);
 		if(asig != null) {
 			Persona p = lpersonas.buscar(rutEstudiante);
