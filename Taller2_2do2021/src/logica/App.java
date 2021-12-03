@@ -181,10 +181,17 @@ public class App {
 		String rutP = "123456789";
 		String rutE = "123456k";
 		//System.out.println(system.obtenerParalelosDictados(rutP));
-		//system.a();
+		system.a();
 		//system.b();
 	}
 	
+	public static void sobreescribir(SystemI system) throws IOException {
+		ArchivoSalida arch = new ArchivoSalida("Egresados.txt");
+		Registro registroSalida = new Registro(1);
+		registroSalida.agregarCampo(false);
+		arch.writeRegistro(registroSalida);
+		arch.close();
+	}
 	
 
 }

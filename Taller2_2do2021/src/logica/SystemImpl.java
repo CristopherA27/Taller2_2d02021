@@ -452,10 +452,13 @@ public class SystemImpl implements SystemI{
 		return false;
 	}
 	
+	
 	public void a() {
+		System.out.println(estudiantesEliminados.getCant());
 		for(int i=0;i<estudiantesEliminados.getCant();i++) {
 			Persona p = estudiantesEliminados.getElemento(i);
 			System.out.println(p.getRut());
+			System.out.println(estudiantesEliminados.getCant());
 		}
 	}
 	
