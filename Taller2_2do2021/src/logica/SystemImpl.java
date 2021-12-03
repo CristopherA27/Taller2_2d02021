@@ -3,18 +3,18 @@ import java.util.Scanner;
 
 import dominio.*;
         
-
 public class SystemImpl implements SystemI{
 	
 	private ListaPersonas lpersonas;
 	private ListaAsignaturas lasignaturas;
 	private ListaParalelos lparalelos;
-
+	private ListaPersonas estudiantesEliminados;
 	
 	public SystemImpl() {
 		lpersonas = new ListaPersonas(100);
 		lasignaturas = new ListaAsignaturas(100);
 		lparalelos = new ListaParalelos(100);
+		estudiantesEliminados = new ListaPersonas(20);
 	}
 
 	@Override
@@ -408,6 +408,8 @@ public class SystemImpl implements SystemI{
 									}
 								}
 							}
+						}else {
+							throw new NullPointerException("El estudiante "+p+" no existe");
 						}
 					}
 				}
@@ -436,6 +438,7 @@ public class SystemImpl implements SystemI{
 							if(lp.getElemento(a).getRut().equals(e.getRut())) {
 								paralelo.getListaEstudiantes().eliminar(e.getRut());
 								paralelo.setCantEstudiantes(paralelo.getCantEstudiantes()-1);
+								estudiantesEliminados.ingresar(e);
 								lpersonas.eliminar(e.getRut());
 								return true;
 							}
@@ -447,6 +450,13 @@ public class SystemImpl implements SystemI{
 			}
 		}
 		return false;
+	}
+	
+	public void a() {
+		for(int i=0;i<estudiantesEliminados.getCant();i++) {
+			Persona p = estudiantesEliminados.getElemento(i);
+			System.out.println(p.getRut());
+		}
 	}
 	
 }

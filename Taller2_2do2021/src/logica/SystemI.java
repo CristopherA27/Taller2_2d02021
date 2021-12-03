@@ -34,4 +34,6 @@ public interface SystemI {
 	//OBTENERPARALELOSDICTADOS
 	public boolean ingresarNotaFinal(int numeroParalelo,String codigoAsignatura,String rutEstudiante,double notaFinal);
 	public boolean eliminarEstudiante();
+	
+	public void a();
 }
