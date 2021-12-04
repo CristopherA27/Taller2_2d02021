@@ -8,6 +8,13 @@ import ucn.*;
 
 public class App {
 	
+	
+	/**
+	 * procedure that reads the course text file
+	 * @param system
+	 * @throws IOException
+	 */
+	
 	public static void leerAsignaturas(SystemI system) throws FileNotFoundException {
 		Scanner s = new Scanner(new File("Asignaturas.txt"));
 		//System.out.println("Leyendo asignaturas");
@@ -69,6 +76,11 @@ public class App {
 		return remplazo;
 	}*/
 	
+	/**
+	 * procedure that reads the Students text file
+	 * @param system
+	 * @throws IOException
+	 */
 	public static void leerEstudiantes(SystemI system) throws FileNotFoundException{
 		//System.out.println("Leyendo Estudiantes");
 		Scanner s = new Scanner(new File("Estudiantes.txt"));
@@ -127,6 +139,11 @@ public class App {
 		s.close();
 	}
 	
+	/**
+	 * procedure that reads the teachers text file
+	 * @param system
+	 * @throws IOException
+	 */
 	public static void leerProfesores(SystemI system) throws FileNotFoundException {
 		Scanner s = new Scanner(new File("Profesores.txt"));
 		while(s.hasNextLine()) {
@@ -148,6 +165,12 @@ public class App {
 		s.close();
 	}
 	
+	
+	/**
+	 * procedure that reads the parallels text file
+	 * @param system
+	 * @throws IOException
+	 */
 	public static void leerParalelos(SystemI system) throws IOException {
 		//System.out.println("Leyendo paralelos");
 		Scanner s = new Scanner(new File("Paralelos.txt"));
@@ -168,6 +191,13 @@ public class App {
 		}
 		s.close();
 	}
+	
+	/**
+	 * procedure used to login
+	 * @param system
+	 * return true if the password is "GHI_789" or if the password belongs to an account
+	 * else return false
+	 */
 	
 	public static boolean inicioSesion(SystemI system) {
 		System.out.println("BIENVENIDO AL GESTOR DE ACTIVIDADES UCR");
@@ -230,6 +260,12 @@ public class App {
 		return false;
 	}
 	
+	/**
+	 * This procedure shows all the options available for the student when you log in.
+	 * @param system
+	 * @param rut
+	 * @param fecha
+	 */
 	public static void menuAlumno(SystemI system,String rut,String fecha) {
 		boolean cierre = true;
 		System.out.println("Bienvenido al Menu Estudiante");
@@ -336,6 +372,12 @@ public class App {
 		}
 	}
 	
+	/**
+	 * This procedure shows all the options available for the teachers when you log in.
+	 * @param system
+	 * @param rutProfesor
+	 * @param fecha
+	 */
 	public static void menuProfesor(SystemI system,String rutProfesor,String fecha) {
 		boolean cierre = true;
 		System.out.println("Bienvenido al Menu de Profesores");
@@ -409,7 +451,10 @@ public class App {
 		}
 	}
 	
-	
+	/**
+	 * This procedure shows all the options available for the Admin when you log in.
+	 * @param system
+	 */
 	public static void menuAdmin(SystemI system) {
 		System.out.println("Informacion del semestre consolidada...");
 		System.out.println("Archivo de estudiantes egresados finalizado con exito");
@@ -420,6 +465,12 @@ public class App {
 	
 	public static Scanner leer = new Scanner(System.in);
 	
+	
+	/**
+	 * main function
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		SystemI system = new SystemImpl();
 		leerAsignaturas(system);
@@ -449,7 +500,11 @@ public class App {
 		//system.c();
 		sobreescribir(system);
 	}
-	
+	/**
+	 * It will overwrite the new data in the corresponding txt
+	 * @param system
+	 * @throws IOException
+	 */
 	public static void sobreescribir(SystemI system) throws IOException {
 		ArchivoSalida arch = new ArchivoSalida("Egresados.txt");
 		Registro registroSalida = new Registro(1);
