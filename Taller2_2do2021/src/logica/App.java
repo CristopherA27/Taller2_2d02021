@@ -17,7 +17,6 @@ public class App {
 	
 	public static void leerAsignaturas(SystemI system) throws FileNotFoundException {
 		Scanner s = new Scanner(new File("Asignaturas.txt"));
-		//System.out.println("Leyendo asignaturas");
 		while(s.hasNextLine()) {
 			String line = s.nextLine();
 			String [] partes = line.split(",");
@@ -57,24 +56,10 @@ public class App {
 					System.out.println("\t"+e.getMessage());
 				}
 			}
-			//System.out.println(line);
 		}
 		system.añadirCodeToAsignatura();
 		s.close();
 	}
-	/*
-	public static String rutMejorado(String rutNormal){
-		String remplazado = rutNormal.replace(".","");
-		remplazado = remplazado.replace("-","");
-		remplazado = remplazado.replace("K","k");
-		return remplazado;
-	}
-	
-	public static String correoMejorado(String correo) {
-		String remplazo = correo.replace("@","");
-		remplazo = correo.replace(".","");
-		return remplazo;
-	}*/
 	
 	/**
 	 * procedure that reads the Students text file
@@ -82,7 +67,6 @@ public class App {
 	 * @throws IOException
 	 */
 	public static void leerEstudiantes(SystemI system) throws FileNotFoundException{
-		//System.out.println("Leyendo Estudiantes");
 		Scanner s = new Scanner(new File("Estudiantes.txt"));
 		while(s.hasNextLine()) {
 			String linea = s.nextLine();
@@ -91,13 +75,11 @@ public class App {
 			String correo = partes[1];			
 			int nivelAlumno = Integer.parseInt(partes[2]);
 			String contraseña = partes[3];
-			//System.out.println(linea);
 			try {
 				boolean ingresoEstudiante = system.ingresarEstudiante(rut, correo, contraseña, nivelAlumno);
 				if(ingresoEstudiante) {
 					linea = s.nextLine();
 					int cantAsignaturasCursadas = Integer.parseInt(linea);
-					//System.out.println(linea);
 					for(int i=0;i<cantAsignaturasCursadas;i++) {
 						linea= s.nextLine();
 						String [] partes3 = linea.split(",");
@@ -111,11 +93,9 @@ public class App {
 						}catch (Exception e) {
 							System.out.println(e.getMessage());
 						}
-						//System.out.println(linea);
 					}
 					linea = s.nextLine();
 					int cantAsigInscritas = Integer.parseInt(linea);
-					//System.out.println(linea);
 					for(int j=0;j<cantAsigInscritas;j++) {
 						linea = s.nextLine();
 						String [] partes5 = linea.split(",");
@@ -129,7 +109,6 @@ public class App {
 						}catch (Exception e) {
 							System.out.println(e.getMessage());
 						}
-						//System.out.println(linea);
 					}
 				}
 			}catch (Exception ex) {
@@ -138,6 +117,8 @@ public class App {
 		}
 		s.close();
 	}
+	
+
 	
 	/**
 	 * procedure that reads the teachers text file
@@ -172,7 +153,6 @@ public class App {
 	 * @throws IOException
 	 */
 	public static void leerParalelos(SystemI system) throws IOException {
-		//System.out.println("Leyendo paralelos");
 		Scanner s = new Scanner(new File("Paralelos.txt"));
 		while(s.hasNextLine()) {
 			String linea = s.nextLine();
@@ -219,14 +199,13 @@ public class App {
 			boolean existeLaCuenta = system.existeCorreo(nombreCorreo);
 			if(existeLaCuenta) {
 				String [] tipoCuenta = nombreCorreo.split("@");
-				if(tipoCuenta[1]=="alumnos.ucn.cl") {
-					
+				if(tipoCuenta[1].equals("alumnos.ucn.cl")) {
 					System.out.print("Ingrese la contraseña: ");
 					String contraseña = leer.nextLine();
 					
 					boolean contraCorrect = system.contraseñaCorrecta(nombreCorreo, contraseña);
 					if(contraCorrect) {
-						System.out.print("Ingrese la fecha ( dia/mes/año): ");
+						System.out.print("Ingrese la fecha (dia/mes): ");
 						String fecha = leer.nextLine();
 						String rut = system.obtenerRutPersona(nombreCorreo,contraseña);
 						menuAlumno(system, rut,fecha);
@@ -237,7 +216,7 @@ public class App {
 						return false;
 					}
 				}
-				if(tipoCuenta[1]=="ucn.cl") {
+				if(tipoCuenta[1].equals("ucn.cl")) {
 					
 					System.out.print("Ingrese la contraseña: ");
 					String contraseña = leer.nextLine();
@@ -268,6 +247,7 @@ public class App {
 	 */
 	public static void menuAlumno(SystemI system,String rut,String fecha) {
 		boolean cierre = true;
+		System.out.println();
 		System.out.println("Bienvenido al Menu Estudiante");
 		System.out.println("");
 		
@@ -284,14 +264,14 @@ public class App {
 			}
 			//Inicio Semestre
 			if((mes>=3 && dia>=8)||(mes<=5&&dia<=2)) {
-				System.out.println("INSCRIPCION DE ASIGNATURAS");
-				System.out.println("¿Que accion desea realizar?:");
-				System.out.println("");
+				System.out.println("MENU INICIO DE SEMESTRE");
+				System.out.println();
 				System.out.println("A) Inscribir Asignaturas");
 				System.out.println("B) Eliminar Asignaturas");
-				System.out.println("");
+				System.out.print("¿Que accion desea realizar?:");
 				String respuesta = leer.nextLine();
-				if(respuesta=="a") {				
+				System.out.println();
+				if(respuesta.equalsIgnoreCase("A")) {				
 					//
 					System.out.println("Asignaturas Obligatorias Disponibles");
 					System.out.println("");
@@ -303,6 +283,7 @@ public class App {
 					System.out.println("");
 					System.out.print("Que asignatura desea inscribir?: ");
 					String codigoAsignatura = leer.nextLine();
+					System.out.println("El o los paralelos disponibles para esta asignatura son:");
 					System.out.println(system.obtenerParalelosDisponibles(codigoAsignatura));
 					System.out.println("");
 					int numeroParalelo = leer.nextInt();
@@ -317,7 +298,7 @@ public class App {
 						System.out.println("");
 					}
 				}
-				if(respuesta=="b") {
+				if(respuesta.equalsIgnoreCase("B")) {
 					
 					System.out.println("Asignaturas Inscritas");
 					System.out.println("");
@@ -380,6 +361,7 @@ public class App {
 	 */
 	public static void menuProfesor(SystemI system,String rutProfesor,String fecha) {
 		boolean cierre = true;
+		System.out.println();
 		System.out.println("Bienvenido al Menu de Profesores");
 		System.out.println("");
 		
@@ -396,21 +378,18 @@ public class App {
 			}
 			//Inicio Semestre
 			if((mes>=3 && dia>=8)||(mes<=5&&dia<=2)) {
-				System.out.println("Paralelos:");
+				System.out.println("Paralelos que dicta:");
 				System.out.println("");
 				System.out.println(system.obtenerParalelosDictados(rutProfesor));
 				System.out.println("");
 				System.out.println("¿Que paralelo desea seleccionar?");
 				int numeroParalelo = leer.nextInt();
 				System.out.println("");
-				try {
-					System.out.println("Alumnos del Paralelo:");
-					System.out.println("");
-					System.out.println(system.obtenerAlumnosDeParalelo(numeroParalelo,rutProfesor));
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-					System.out.println("");
-				}	
+				System.out.println("Alumnos del Paralelo:");
+				System.out.println("");
+				System.out.println(system.obtenerAlumnosDeParalelo(numeroParalelo,rutProfesor));
+				//System.out.println(e.getMessage());
+				System.out.println("");		
 			}
 			//Mitad Semestre
 			if((mes>=5&& dia>=3)||(mes<=7&&dia<=17)) {
@@ -492,12 +471,7 @@ public class App {
 			}	
 		}
 		leer.close();
-		String rutP = "123456789";
-		String rutE = "123456k";
-		//System.out.println(system.obtenerParalelosDictados(rutP));
-		//system.a();x
-		//system.b();
-		//system.c();
+
 		sobreescribir(system);
 	}
 	/**

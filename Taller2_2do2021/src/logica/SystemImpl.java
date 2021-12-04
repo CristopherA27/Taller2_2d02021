@@ -292,7 +292,7 @@ public class SystemImpl implements SystemI{
 			for(int i=0;i<lparalelos.getCant();i++) {
 				Paralelo paralelo = lparalelos.getElementoI(i);
 				if(paralelo.getAsignatura().equals(codigoAsignatura) && paralelo.getCantEstudiantes()<100 ) {
-					dato += paralelo.getNumeroParalelo()+" "+paralelo.getRutProfesor()+"\n";
+					dato +="\tNumero Paralelo:"+paralelo.getNumeroParalelo()+"            Rut Profesor del Paralelo:"+paralelo.getRutProfesor()+"\n";
 				}
 			}
 		}
@@ -559,7 +559,7 @@ public class SystemImpl implements SystemI{
 	  *@param correo
 	  return boolean
 	  */
-	public boolean existeCorreo(String ) {
+	public boolean existeCorreo(String correo ) {
 		for(int i=0;i<lpersonas.getCant();i++) {
 			Persona p = lpersonas.getElemento(i);
 			if(p.getCorreo().equalsIgnoreCase(correo)) {

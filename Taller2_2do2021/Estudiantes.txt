@@ -1,11 +1,11 @@
-123456k,Jorge.perez@alumnos.ucn.cl,4,Abc_123
+123456k,jorge.perez@alumnos.ucn.cl,4,123
 2
 1284,4.1
 1085,5.1
 1
 1286,123
-7777777,lopez@app.cl,10,123456
+7777777,lopez@alumnos.ucn.cl,10,123456
 1
 1284,4.1
 1
-1286,123
+1285,123

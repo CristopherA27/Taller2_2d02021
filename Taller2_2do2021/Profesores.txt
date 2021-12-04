@@ -1,2 +1,2 @@
-123456789,Renka.rodriguez@ucn.cl,Def_456,1350000
-111111111,joselopez@inacap.cl,abc123,500000
+123456789,Renka.rodriguez@ucn.cl,123,1350000
+111111111,joselopez@ucn.cl,abc123,500000
