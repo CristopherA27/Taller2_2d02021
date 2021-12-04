@@ -238,7 +238,6 @@ public class App {
 		}
 		return false;
 	}
-	
 	/**
 	 * This procedure shows all the options available for the student when you log in.
 	 * @param system
@@ -550,6 +549,7 @@ public class App {
 				System.out.println("");
 				System.out.println("¿Que paralelo desea seleccionar?");
 				int numeroParalelo = leer.nextInt();
+				leer.nextLine();
 				System.out.println("Ingrese el codigo de la Asignatura: ");
 				String codigoAsignatura = leer.nextLine();
 				System.out.println("");
@@ -572,6 +572,12 @@ public class App {
 					System.out.println(e.getMessage());
 					System.out.println("");
 				}	
+			}
+			leer.nextLine();
+			System.out.print("¿Desea cerrar el menu?: ");
+			String respuesta = leer.nextLine();
+			if(respuesta.equals("si")){
+				cierre = false;
 			}
 		}
 	}
