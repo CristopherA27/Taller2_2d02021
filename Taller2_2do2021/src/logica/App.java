@@ -370,7 +370,7 @@ public class App {
 				}
 				
 			}
-			if(mes==5&&dia<=26) {
+			if(mes==5&&dia<=2) {
 				System.out.println("MENU INICIO DE SEMESTRE");
 				System.out.println();
 				System.out.println("A) Inscribir Asignaturas");
@@ -441,7 +441,7 @@ public class App {
 				}
 			}
 			//Final Semestre
-			if((mes>=7&&dia>=12)||(mes<=7&&dia<=25)) {
+			if(mes==7&&dia>=12&&dia<=25) {
 				System.out.println("No hay acciones disponibles");
 				System.out.println("");
 			}
@@ -452,7 +452,7 @@ public class App {
 			}
 			
 			
-			System.out.print("queri cerrar la wea?");
+			System.out.print("¿Desea cerrar el menu?: ");
 			String respuesta = leer.nextLine();
 			if(respuesta.equals("si")){
 				cierre = false;
@@ -484,7 +484,37 @@ public class App {
 				System.out.println("");
 			}
 			//Inicio Semestre
-			if((mes>=3 && dia>=8)||(mes<=5&&dia<=2)) {
+			if(mes==3 && dia>=8) {
+				System.out.println("Paralelos que dicta:");
+				System.out.println("");
+				System.out.println(system.obtenerParalelosDictados(rutProfesor));
+				System.out.println("");
+				System.out.println("¿Que paralelo desea seleccionar?");
+				int numeroParalelo = leer.nextInt();
+				System.out.println("");
+				System.out.println("Alumnos del Paralelo:");
+				System.out.println("");
+				System.out.println(system.obtenerAlumnosDeParalelo(numeroParalelo,rutProfesor));
+				//System.out.println(e.getMessage());
+				System.out.println("");
+					
+			}
+			if(mes==4 && dia<=31) {
+				System.out.println("Paralelos que dicta:");
+				System.out.println("");
+				System.out.println(system.obtenerParalelosDictados(rutProfesor));
+				System.out.println("");
+				System.out.println("¿Que paralelo desea seleccionar?");
+				int numeroParalelo = leer.nextInt();
+				System.out.println("");
+				System.out.println("Alumnos del Paralelo:");
+				System.out.println("");
+				System.out.println(system.obtenerAlumnosDeParalelo(numeroParalelo,rutProfesor));
+				//System.out.println(e.getMessage());
+				System.out.println("");
+					
+			}
+			if(mes==5 && dia<=2) {
 				System.out.println("Paralelos que dicta:");
 				System.out.println("");
 				System.out.println(system.obtenerParalelosDictados(rutProfesor));
@@ -500,12 +530,20 @@ public class App {
 					
 			}
 			//Mitad Semestre
-			if((mes>=5&& dia>=3)||(mes<=7&&dia<=17)) {
+			if(mes==5&& dia>=3) {
+				System.out.println("No hay acciones disponibles");
+				System.out.println("");
+			}
+			if(mes==6&& dia<=31) {
+				System.out.println("No hay acciones disponibles");
+				System.out.println("");
+			}
+			if(mes==7&& dia<=11) {
 				System.out.println("No hay acciones disponibles");
 				System.out.println("");
 			}
 			//Final Semestre
-			if((mes>=7&&dia>=12)||(mes<=7&&dia<=25)) {
+			if((mes==7&&dia>=12 &&dia<=25)) {
 				System.out.println("Paralelos:");
 				System.out.println("");
 				System.out.println(system.obtenerParalelosDictados(rutProfesor));
