@@ -37,4 +37,11 @@ public interface SystemI {
 	
 	//SOBREESCRIBIR
 	public String estudiantesEliminados();
+	
+	//
+	public boolean existeCorreo(String correo);
+	public boolean contraseñaCorrecta(String nombreCorreo, String contraseña);
+	public String obtenerRutPersona(String nombreCorreo, String contraseña);
+	
+	
 }

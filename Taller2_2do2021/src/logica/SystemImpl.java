@@ -457,4 +457,37 @@ public class SystemImpl implements SystemI{
 		return dato;
 	}
 	
+	public boolean existeCorreo(String correo) {
+		for(int i=0;i<lpersonas.getCant();i++) {
+			Persona p = lpersonas.getElemento(i);
+			if(p.getCorreo().equalsIgnoreCase(correo)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean contraseñaCorrecta(String nombreCorreo, String contraseña) {
+		for(int i=0;i<lpersonas.getCant();i++) {
+			Persona p = lpersonas.getElemento(i);
+			if(p.getCorreo().equals(nombreCorreo) && p.getContraseña().equals(contraseña)) {
+				return true;
+			}
+		}
+		return false;
+	} 	
+	
+	public String obtenerRutPersona(String nombreCorreo, String contraseña) {
+		String rutBuscado="";
+		for(int i=0;i<lpersonas.getCant();i++) {
+			Persona p = lpersonas.getElemento(i);
+			if(p.getCorreo().equals(nombreCorreo) && p.getContraseña().equals(contraseña)) {
+				rutBuscado= p.getRut();
+						
+			}
+		}
+		return rutBuscado;
+	}
+	
+	
 }

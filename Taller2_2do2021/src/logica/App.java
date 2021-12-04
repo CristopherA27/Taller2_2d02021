@@ -112,7 +112,7 @@ public class App {
 						try {
 							boolean ingresoInscrita = system.ingresarAsociarAsignaturaInscrita(rut, codigoAsignatura, numeroParalelo);
 							if(!ingresoInscrita) {
-								System.out.println("No se pudo ingresar la asignatura Inscrita+-");
+								System.out.println("No se pudo ingresar la asignatura Inscrita");
 							}
 						}catch (Exception e) {
 							System.out.println(e.getMessage());
@@ -186,7 +186,7 @@ public class App {
 			}
 		}
 		else{
-			boolean existeLaCuenta = system.existeCuenta(nombreCorreo);
+			boolean existeLaCuenta = system.existeCorreo(nombreCorreo);
 			if(existeLaCuenta) {
 				String [] tipoCuenta = nombreCorreo.split("@");
 				if(tipoCuenta[1]=="alumnos.ucn.cl") {
@@ -198,7 +198,7 @@ public class App {
 					if(contraCorrect) {
 						System.out.print("Ingrese la fecha ( dia/mes/año): ");
 						String fecha = leer.nextLine();
-						
+						String rut = system.obtenerRutPersona(nombreCorreo,contraseña);
 						menuAlumno(system, rut,fecha);
 						return true;
 					}
@@ -216,7 +216,8 @@ public class App {
 					if(contraCorrect) {
 						System.out.print("Ingrese la fecha: ");
 						String fecha = leer.nextLine();
-						menuProfesor(system, nombreCorreo,fecha);
+						String rut = system.obtenerRutPersona(nombreCorreo,contraseña);
+						menuProfesor(system, rut,fecha);
 						return true;
 					}
 					else {
@@ -226,6 +227,7 @@ public class App {
 				}
 			}					
 		}
+		return false;
 	}
 	
 	public static void menuAlumno(SystemI system,String rut,String fecha) {
@@ -408,7 +410,7 @@ public class App {
 	}
 	
 	
-	public static void menuAdmin(SystemI system,String fecha) {
+	public static void menuAdmin(SystemI system) {
 		System.out.println("Informacion del semestre consolidada...");
 		System.out.println("Archivo de estudiantes egresados finalizado con exito");
 		//sobreescribir
