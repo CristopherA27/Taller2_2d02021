@@ -389,7 +389,8 @@ public class App {
 				System.out.println("");
 				System.out.println(system.obtenerAlumnosDeParalelo(numeroParalelo,rutProfesor));
 				//System.out.println(e.getMessage());
-				System.out.println("");		
+				System.out.println("");
+					
 			}
 			//Mitad Semestre
 			if((mes>=5&& dia>=3)||(mes<=7&&dia<=17)) {
