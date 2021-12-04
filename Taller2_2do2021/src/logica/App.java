@@ -263,7 +263,114 @@ public class App {
 				System.out.println("");
 			}
 			//Inicio Semestre
-			if((mes>=3 && dia>=8)||(mes<=5&&dia<=2)) {
+			if(mes==3&&dia>=8) {
+				System.out.println("MENU INICIO DE SEMESTRE");
+				System.out.println();
+				System.out.println("A) Inscribir Asignaturas");
+				System.out.println("B) Eliminar Asignaturas");
+				System.out.print("¿Que accion desea realizar?:");
+				String respuesta = leer.nextLine();
+				System.out.println();
+				if(respuesta.equalsIgnoreCase("A")) {				
+					//
+					System.out.println("Asignaturas Obligatorias Disponibles");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasObligatoriasDisponibles(rut));	
+					System.out.println("");
+					System.out.println("Asignaturas Opcionales Disponibles");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasOpcionalesDisponibles(rut));		
+					System.out.println("");
+					System.out.print("Que asignatura desea inscribir?: ");
+					String codigoAsignatura = leer.nextLine();
+					System.out.println("El o los paralelos disponibles para esta asignatura son:");
+					System.out.println(system.obtenerParalelosDisponibles(codigoAsignatura));
+					System.out.println("");
+					int numeroParalelo = leer.nextInt();
+					try {
+						boolean inscrito = system.inscribirAsignatura(rut,codigoAsignatura,numeroParalelo);
+						if(inscrito) {
+							System.out.println("Asignatura inscrita con exito");
+							System.out.println("");
+						}
+					}catch (Exception e) {
+						System.out.println(e.getMessage());
+						System.out.println("");
+					}
+				}
+				if(respuesta.equalsIgnoreCase("B")) {
+					
+					System.out.println("Asignaturas Inscritas");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasInscritas(rut));
+					System.out.println("");
+					System.out.println("¿Que asignatura desea eliminar?: ");
+					String codigoAsignatura = leer.nextLine();
+					try {
+						boolean eliminado = system.eliminarAsignaturaInscrita(rut,codigoAsignatura);
+						System.out.println("Asignatura eliminada con exito");
+						System.out.println("");
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+						System.out.println("");
+					}
+				}
+			}
+			if(mes==4&&dia<31) {
+				System.out.println("MENU INICIO DE SEMESTRE");
+				System.out.println();
+				System.out.println("A) Inscribir Asignaturas");
+				System.out.println("B) Eliminar Asignaturas");
+				System.out.print("¿Que accion desea realizar?:");
+				String respuesta = leer.nextLine();
+				System.out.println();
+				if(respuesta.equalsIgnoreCase("A")) {				
+					//
+					System.out.println("Asignaturas Obligatorias Disponibles");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasObligatoriasDisponibles(rut));	
+					System.out.println("");
+					System.out.println("Asignaturas Opcionales Disponibles");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasOpcionalesDisponibles(rut));		
+					System.out.println("");
+					System.out.print("Que asignatura desea inscribir?: ");
+					String codigoAsignatura = leer.nextLine();
+					System.out.println("El o los paralelos disponibles para esta asignatura son:");
+					System.out.println(system.obtenerParalelosDisponibles(codigoAsignatura));
+					System.out.println("");
+					int numeroParalelo = leer.nextInt();
+					try {
+						boolean inscrito = system.inscribirAsignatura(rut,codigoAsignatura,numeroParalelo);
+						if(inscrito) {
+							System.out.println("Asignatura inscrita con exito");
+							System.out.println("");
+						}
+					}catch (Exception e) {
+						System.out.println(e.getMessage());
+						System.out.println("");
+					}
+				}
+				if(respuesta.equalsIgnoreCase("B")) {
+					
+					System.out.println("Asignaturas Inscritas");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasInscritas(rut));
+					System.out.println("");
+					System.out.println("¿Que asignatura desea eliminar?: ");
+					String codigoAsignatura = leer.nextLine();
+					try {
+						boolean eliminado = system.eliminarAsignaturaInscrita(rut,codigoAsignatura);
+						System.out.println("Asignatura eliminada con exito");
+						System.out.println("");
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+						System.out.println("");
+					}
+				}
+				
+			}
+			if(mes==5&&dia<=26) {
 				System.out.println("MENU INICIO DE SEMESTRE");
 				System.out.println();
 				System.out.println("A) Inscribir Asignaturas");
