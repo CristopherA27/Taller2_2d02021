@@ -196,9 +196,10 @@ public class App {
 					
 					boolean contraCorrect = system.contraseñaCorrecta(nombreCorreo, contraseña);
 					if(contraCorrect) {
-						System.out.print("Ingrese la fecha: ");
+						System.out.print("Ingrese la fecha ( dia/mes/año): ");
 						String fecha = leer.nextLine();
-						menuAlumnos(system, nombreCorreo,fecha);
+						
+						menuAlumno(system, rut,fecha);
 						return true;
 					}
 					else {
@@ -215,33 +216,207 @@ public class App {
 					if(contraCorrect) {
 						System.out.print("Ingrese la fecha: ");
 						String fecha = leer.nextLine();
-						menuProfesores(system, nombreCorreo,fecha);
+						menuProfesor(system, nombreCorreo,fecha);
 						return true;
 					}
 					else {
 						System.out.println("Contraseña incorrecta...");
 						return false;
 					}
-			
 				}
-			
-			}
-			
-					
+			}					
 		}
 	}
+	
+	public static void menuAlumno(SystemI system,String rut,String fecha) {
+		boolean cierre = true;
+		System.out.println("Bienvenido al Menu Estudiante");
+		System.out.println("");
+		
+		
+		while(cierre) {
+			String [] partes = fecha.split("/");	
+			int dia = Integer.parseInt(partes[0]);
+			int mes = Integer.parseInt(partes[1]);
+			
+			//Vacaciones
+			if((mes<=3&& dia<8)||(mes>=7&&dia>26)) {
+				System.out.println("Disfrute sus vacaciones");	
+				System.out.println("");
+			}
+			//Inicio Semestre
+			if((mes>=3 && dia>=8)||(mes<=5&&dia<=2)) {
+				System.out.println("INSCRIPCION DE ASIGNATURAS");
+				System.out.println("¿Que accion desea realizar?:");
+				System.out.println("");
+				System.out.println("A) Inscribir Asignaturas");
+				System.out.println("B) Eliminar Asignaturas");
+				System.out.println("");
+				String respuesta = leer.nextLine();
+				if(respuesta=="a") {				
+					//
+					System.out.println("Asignaturas Obligatorias Disponibles");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasObligatoriasDisponibles(rut));	
+					System.out.println("");
+					System.out.println("Asignaturas Opcionales Disponibles");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasOpcionalesDisponibles(rut));		
+					System.out.println("");
+					System.out.print("Que asignatura desea inscribir?: ");
+					String codigoAsignatura = leer.nextLine();
+					System.out.println(system.obtenerParalelosDisponibles(codigoAsignatura));
+					System.out.println("");
+					int numeroParalelo = leer.nextInt();
+					try {
+						boolean inscrito = system.inscribirAsignatura(rut,codigoAsignatura,numeroParalelo);
+						if(inscrito) {
+							System.out.println("Asignatura inscrita con exito");
+							System.out.println("");
+						}
+					}catch (Exception e) {
+						System.out.println(e.getMessage());
+						System.out.println("");
+					}
+				}
+				if(respuesta=="b") {
+					
+					System.out.println("Asignaturas Inscritas");
+					System.out.println("");
+					System.out.println(system.obtenerAsignaturasInscritas(rut));
+					System.out.println("");
+					System.out.println("¿Que asignatura desea eliminar?: ");
+					String codigoAsignatura = leer.nextLine();
+					try {
+						boolean eliminado = system.eliminarAsignaturaInscrita(rut,codigoAsignatura);
+						System.out.println("Asignatura eliminada con exito");
+						System.out.println("");
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+						System.out.println("");
+					}
+				}
+			}
+			//Mitad Semestre
+			if((mes>=5&& dia>=3)||(mes<=7&&dia<=17)) {
+				System.out.println("Asignaturas Inscritas");
+				System.out.println("");
+				System.out.println(system.obtenerAsignaturasInscritas(rut));
+				System.out.println("");
+				System.out.println("¿Que asignatura desea eliminar?: ");
+				String codigoAsignatura = leer.nextLine();
+				try {
+					boolean eliminado = system.eliminarAsignaturaInscrita(rut,codigoAsignatura);
+					System.out.println("Asignatura eliminada con exito");
+					System.out.println("");
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println("");
+				}
+			}
+			//Final Semestre
+			if((mes>=7&&dia>=12)||(mes<=7&&dia<=25)) {
+				System.out.println("No hay acciones disponibles");
+				System.out.println("");
+			}
+			//Cierre Semestre
+			if(mes==7&&dia==26) {
+				System.out.println("No hay acciones disponibles");
+				System.out.println("");
+			}
+			
+			
+			System.out.print("queri cerrar la wea?");
+			String respuesta = leer.nextLine();
+			if(respuesta.equals("si")){
+				cierre = false;
+			}
+		}
+	}
+	
+	public static void menuProfesor(SystemI system,String rutProfesor,String fecha) {
+		boolean cierre = true;
+		System.out.println("Bienvenido al Menu de Profesores");
+		System.out.println("");
+		
+		while(cierre) {
 
+			String [] partes = fecha.split("/");	
+			int dia = Integer.parseInt(partes[0]);
+			int mes = Integer.parseInt(partes[1]);
+			
+			//Vacaciones
+			if((mes<=3&& dia<8)||(mes>=7&&dia>26)) {
+				System.out.println("Disfrute sus vacaciones");	
+				System.out.println("");
+			}
+			//Inicio Semestre
+			if((mes>=3 && dia>=8)||(mes<=5&&dia<=2)) {
+				System.out.println("Paralelos:");
+				System.out.println("");
+				System.out.println(system.obtenerParalelosDictados(rutProfesor));
+				System.out.println("");
+				System.out.println("¿Que paralelo desea seleccionar?");
+				int numeroParalelo = leer.nextInt();
+				System.out.println("");
+				try {
+					System.out.println("Alumnos del Paralelo:");
+					System.out.println("");
+					System.out.println(system.obtenerAlumnosDeParalelo(numeroParalelo,rutProfesor));
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println("");
+				}	
+			}
+			//Mitad Semestre
+			if((mes>=5&& dia>=3)||(mes<=7&&dia<=17)) {
+				System.out.println("No hay acciones disponibles");
+				System.out.println("");
+			}
+			//Final Semestre
+			if((mes>=7&&dia>=12)||(mes<=7&&dia<=25)) {
+				System.out.println("Paralelos:");
+				System.out.println("");
+				System.out.println(system.obtenerParalelosDictados(rutProfesor));
+				System.out.println("");
+				System.out.println("¿Que paralelo desea seleccionar?");
+				int numeroParalelo = leer.nextInt();
+				System.out.println("Ingrese el codigo de la Asignatura: ");
+				String codigoAsignatura = leer.nextLine();
+				System.out.println("");
+				try {
+					System.out.println("Alumnos del Paralelo:");
+					System.out.println("");
+					System.out.println(system.obtenerAlumnosDeParalelo(numeroParalelo,rutProfesor));
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println("");
+				}
+				System.out.print("Ingrese el rut del Estudiante: ");
+				String rutEstudiante = leer.nextLine();
+				System.out.print("Ingrese la nota: ");
+				int notaFinal = leer.nextInt();
+				
+				try {
+					boolean notaIngresada = system.ingresarNotaFinal(numeroParalelo,codigoAsignatura,rutEstudiante,notaFinal);
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println("");
+				}	
+			}
+		}
+	}
 	
-}
+	
+	public static void menuAdmin(SystemI system,String fecha) {
+		System.out.println("Informacion del semestre consolidada...");
+		System.out.println("Archivo de estudiantes egresados finalizado con exito");
+		//sobreescribir
+	}
 	
 	
 	
-	
-	
-	
-	
-	
-
+	public static Scanner leer = new Scanner(System.in);
 	
 	public static void main(String[] args) throws IOException {
 		SystemI system = new SystemImpl();
@@ -249,6 +424,21 @@ public class App {
 		leerProfesores(system);
 		leerParalelos(system);
 		leerEstudiantes(system);
+		while(true) {
+			boolean usuario = inicioSesion(system);
+			if(usuario) {
+				System.out.println("Desea cerrar el sistema? (Si) o (No)");
+				String resp = leer.nextLine();
+				while(!resp.equalsIgnoreCase("Si") && !resp.equalsIgnoreCase("No")) {
+					System.out.println("Desea cerrar el sistema? (Si) o (No)");
+					resp = leer.nextLine();
+				}
+				if(resp.equalsIgnoreCase("Si")) {
+					break;
+				}
+			}	
+		}
+		leer.close();
 		String rutP = "123456789";
 		String rutE = "123456k";
 		//System.out.println(system.obtenerParalelosDictados(rutP));
